@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Definition.h"
 
-@interface PlayerMachineViewController : UIViewController
+@interface PlayerMachineViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @end
