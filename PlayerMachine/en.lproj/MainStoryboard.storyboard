@@ -14,7 +14,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKa-Ce-d6d">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="0La-IF-FSK"/>
+                                    <constraint firstAttribute="width" constant="200" id="XKv-iB-d9e"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="WIJAM.png">
@@ -25,30 +25,75 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="modal" id="7F4-NM-SSH"/>
+                                    <action selector="JAM:" destination="uvJ-Vr-RlW" eventType="touchUpInside" id="wOU-Vp-kxf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="WI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4e-wq-kr3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="WI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4e-wq-kr3">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="HMP-9v-csM"/>
+                                    <constraint firstAttribute="width" constant="230" id="Ibg-Wd-Qdj"/>
                                     <constraint firstAttribute="height" constant="58" id="zb3-Kh-CK3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="65"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORO-iL-7Zm">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="63" id="JEK-j6-J2O"/>
+                                    <constraint firstAttribute="height" constant="21" id="lND-Ro-A1P"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="23"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXk-hL-gwt">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="118" id="9fd-a4-eUv"/>
+                                    <constraint firstAttribute="height" constant="26" id="qov-Wq-fHK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="23"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZt-f4-bnC">
+                                <accessibility key="accessibilityConfiguration" label="Loop"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6Bd-fA-GxI"/>
+                                    <constraint firstAttribute="width" constant="40" id="ubj-2b-QO7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal" backgroundImage="Triangle.png">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="masterDown:" destination="uvJ-Vr-RlW" eventType="touchUpInside" id="em5-2X-e5N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="N4e-wq-kr3" firstAttribute="centerX" secondItem="vKa-Ce-d6d" secondAttribute="centerX" type="default" id="05D-n2-d1v"/>
-                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="top" secondItem="N4e-wq-kr3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="GNz-ou-ypI"/>
-                            <constraint firstItem="N4e-wq-kr3" firstAttribute="centerX" secondItem="eZm-Os-gX3" secondAttribute="centerX" type="default" id="Rj7-xT-kAw"/>
-                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerY" secondItem="eZm-Os-gX3" secondAttribute="centerY" type="default" id="ltD-Fx-wRc"/>
+                            <constraint firstItem="N4e-wq-kr3" firstAttribute="centerX" secondItem="vKa-Ce-d6d" secondAttribute="centerX" type="default" id="QUs-xc-00Q"/>
+                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerY" secondItem="eZm-Os-gX3" secondAttribute="centerY" type="default" id="SvR-T8-vkb"/>
+                            <constraint firstAttribute="bottom" secondItem="xZt-f4-bnC" secondAttribute="bottom" constant="80" id="bPY-eG-0z0"/>
+                            <constraint firstItem="ORO-iL-7Zm" firstAttribute="leading" secondItem="N4e-wq-kr3" secondAttribute="leading" type="default" id="e9z-f9-700"/>
+                            <constraint firstAttribute="bottom" secondItem="QXk-hL-gwt" secondAttribute="bottom" constant="88" id="gII-fq-ghP"/>
+                            <constraint firstItem="xZt-f4-bnC" firstAttribute="leading" secondItem="QXk-hL-gwt" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="jFm-go-9uE"/>
+                            <constraint firstItem="N4e-wq-kr3" firstAttribute="centerX" secondItem="eZm-Os-gX3" secondAttribute="centerX" type="default" id="jnE-uh-Aps"/>
+                            <constraint firstAttribute="bottom" secondItem="ORO-iL-7Zm" secondAttribute="bottom" constant="91" id="lIt-TF-2FC"/>
+                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="top" secondItem="N4e-wq-kr3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="oQX-b4-Qza"/>
+                            <constraint firstItem="QXk-hL-gwt" firstAttribute="leading" secondItem="ORO-iL-7Zm" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="vzk-h7-6Gl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Down" destination="xZt-f4-bnC" id="KjG-vH-p8O"/>
                         <outlet property="JAM" destination="vKa-Ce-d6d" id="2oW-HZ-hHr"/>
                         <outlet property="WI" destination="N4e-wq-kr3" id="xgz-4W-ykk"/>
+                        <outlet property="masterName" destination="QXk-hL-gwt" id="vXs-Bi-CAm"/>
+                        <outlet property="with" destination="ORO-iL-7Zm" id="3qM-OM-0GP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kJ-e9-FFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -151,7 +196,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="64" y="159"/>
+            <point key="canvasLocation" x="112" y="159"/>
         </scene>
         <!--Advanced Player-->
         <scene sceneID="uFM-0e-ryw">
@@ -213,12 +258,15 @@
         <image name="Advanced.png" width="100" height="100"/>
         <image name="QUIT.png" width="50" height="30"/>
         <image name="Simple.png" width="100" height="100"/>
+        <image name="Triangle.png" width="50" height="50"/>
         <image name="WIJAM.png" width="200" height="200"/>
     </resources>
     <classes>
         <class className="AdvancedPlayer" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedPlayer.h"/>
             <relationships>
+                <relationship kind="action" name="LongPressed:"/>
+                <relationship kind="action" name="backToSimple:"/>
                 <relationship kind="outlet" name="SimpleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="mainImage" candidateClass="UIImageView"/>
             </relationships>
@@ -229,6 +277,9 @@
         <class className="PlayerMachineViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayerMachineViewController.h"/>
             <relationships>
+                <relationship kind="action" name="GotoAdvanced:"/>
+                <relationship kind="action" name="LongPressed:"/>
+                <relationship kind="action" name="QUIT:"/>
                 <relationship kind="outlet" name="IMAdvanced" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="QUIT" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="instImage" candidateClass="UIImageView"/>
@@ -239,8 +290,13 @@
         <class className="mainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/mainViewController.h"/>
             <relationships>
+                <relationship kind="action" name="JAM:"/>
+                <relationship kind="action" name="masterDown:"/>
+                <relationship kind="outlet" name="Down" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="JAM" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WI" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="masterName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="with" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>
