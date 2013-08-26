@@ -11,4 +11,7 @@
 
 @interface PlayerMachineViewController : UIViewController <UIGestureRecognizerDelegate>
 
+// The objects used during segue
+@property BOOL *masterConnected;
+
 @end

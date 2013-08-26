@@ -149,14 +149,14 @@
 				900C10D917C4AD5200BE46AF /* AdvancedPlayer.m */,
 				900C10DA17C4AD5200BE46AF /* mainViewController.h */,
 				900C10DB17C4AD5200BE46AF /* mainViewController.m */,
+				9094414517BB286800F3A0FD /* PlayerMachineViewController.h */,
+				9094414617BB286800F3A0FD /* PlayerMachineViewController.m */,
 				9094414217BB286800F3A0FD /* MainStoryboard.storyboard */,
 				907D9FB417BE033B00147DBC /* Definition.h */,
 				9035444517BF7D4000881C6B /* Drawing.h */,
 				9035444617BF7D4000881C6B /* Drawing.m */,
 				9094413917BB286800F3A0FD /* PlayerMachineAppDelegate.h */,
 				9094413A17BB286800F3A0FD /* PlayerMachineAppDelegate.m */,
-				9094414517BB286800F3A0FD /* PlayerMachineViewController.h */,
-				9094414617BB286800F3A0FD /* PlayerMachineViewController.m */,
 				9094413117BB286800F3A0FD /* Supporting Files */,
 			);
 			path = PlayerMachine;

@@ -43,6 +43,8 @@
     BOOL mouseSwiped;
     
     BOOL longPressed;
+    
+    UInt16 counter;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
@@ -51,14 +53,16 @@
 @property (strong, nonatomic) IBOutlet UIButton *IMAdvanced;
 @property (strong, nonatomic) IBOutlet UIButton *QUIT;
 
-
 @property (nonatomic, retain) NSTimer *draw;
+
+// The objects used during segue
+@property (nonatomic, retain) NSTimer *makeSureConnected;
+@property (strong, nonatomic) IBOutlet UILabel *masterConnectedLabel;
+
 
 @end
 
 @implementation PlayerMachineViewController
-
-@synthesize draw;
 
 - (void)viewDidLoad
 {
@@ -74,7 +78,7 @@
     notePos = 0;
     width = self.view.frame.size.width;
     height = self.view.frame.size.height;
-    draw = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(processingDraw) userInfo:nil repeats:YES];
+    _draw = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(processingDraw) userInfo:nil repeats:YES];
     [self.mainImage setAlpha:opacity];
     
     [self clearAnimationArrays];
@@ -89,19 +93,38 @@
     path = [UIBezierPath bezierPath];
     
     longPressed = false;
-    
-    
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     self.instImage.alpha = 1;
+    self.masterConnectedLabel.alpha = 0;
     [UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.instImage.alpha = 0;} completion:NO];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    // Initialize objects during segue
+    _makeSureConnected = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkIfConnected) userInfo:nil repeats:YES];
+    counter = 0;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Make Sure Process After Segue
+- (void)checkIfConnected {
+    if (counter++ > 3) {
+        counter = 0;
+        [_makeSureConnected invalidate];
+        if (*_masterConnected) {
+            [UIView animateWithDuration:1 animations:^{self.masterConnectedLabel.alpha = 1;}];
+            [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.masterConnectedLabel.alpha = 0;} completion:NO];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
 }
 
 #pragma mark - Drawing

@@ -16,6 +16,7 @@
 @interface mainViewController () {
     UInt16 counter;
     BOOL detectConnectedDeviceEnable;
+    BOOL masterConnected;
 }
 @property (strong, nonatomic) IBOutlet UILabel *WI;
 @property (strong, nonatomic) IBOutlet UIButton *JAM;
@@ -51,11 +52,13 @@
     _masterIdx = 0;
     _deviceArray = [NSMutableArray arrayWithObjects:@"...", nil];
     _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
+    [self removeAllConnections];
     
     [self configureNetworkSessionAndServiceBrowser];
     _connectTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(scanServices) userInfo:nil repeats:YES];
     counter = 0;
     detectConnectedDeviceEnable = false;
+    masterConnected = false;
 }
 
 - (void)viewDidLoad
@@ -111,19 +114,35 @@
     [self.services removeObject:service];
 }
 
+- (void) removeAllConnections {
+    for (NSNetService *Service in self.services) {
+        MIDINetworkHost *Host = [MIDINetworkHost hostWithName:Service.name netService:Service];
+        [_Session removeContact:Host];
+        MIDINetworkConnection *Con = [MIDINetworkConnection connectionWithHost:Host];
+        if (Con) {
+            [_Session removeConnection:Con];
+        }
+    }
+}
+
+#pragma mark - master selection
+
 - (void) detectConnectedDevices {
     if (counter++ >2) {
         counter = 0;
+        [_connectTimer invalidate];
+        [_serviceBrowser stop];
         detectConnectedDeviceEnable = false;
         NSLog(@"Connected to %u devices:", [_Session.connections count]);
         for (MIDINetworkConnection *conn in _Session.connections) {
             NSLog(@"Connected to: %@", conn.host.name);
+            NSLog(@"mainViewController ends here");
+            masterConnected = true;
         }
         NSLog(@"\n");
     }
 }
 
-#pragma mark - master selection
 - (void) scanServices {
     NSLog(@"scanServices...");
     
@@ -151,10 +170,8 @@
     }
 }
 
-#pragma mark - start to jam
+#pragma mark - Segue functions
 - (IBAction)JAM:(id)sender {
-    //[_connectTimer invalidate];
-    //[_serviceBrowser stop];
     // Select the connection shown in the masterName label
     detectConnectedDeviceEnable = true;
     for (NSNetService *Service in self.services) {
@@ -165,6 +182,11 @@
             [_Session addConnection:conn];
         }
     }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    PlayerMachineViewController *playerMachineVC = (PlayerMachineViewController *)segue.destinationViewController;
+    playerMachineVC.masterConnected = &masterConnected;
 }
 
 @end
