@@ -13,8 +13,11 @@
 #import "PGMidi/PGArc.h"
 #import "PGMidi/iOSVersionDetection.h"
 
+#import "MIDINote.h"
+#import "Communicator.h"
+
 @interface mainViewController () {
-    UInt16 counter;
+    UInt16 detectConnectedCounter;
     BOOL detectConnectedDeviceEnable;
     BOOL masterConnected;
 }
@@ -27,6 +30,7 @@
 @property (readwrite) MIDINetworkSession *Session;
 @property (nonatomic, retain) NSTimer *connectTimer;
 
+// UI Objects
 @property (strong, nonatomic) IBOutlet UILabel *with;
 @property (strong, nonatomic) IBOutlet UILabel *masterName;
 @property (strong, nonatomic) NSMutableArray *deviceArray;
@@ -56,7 +60,7 @@
     
     [self configureNetworkSessionAndServiceBrowser];
     _connectTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(scanServices) userInfo:nil repeats:YES];
-    counter = 0;
+    detectConnectedCounter = 0;
     detectConnectedDeviceEnable = false;
     masterConnected = false;
 }
@@ -128,8 +132,8 @@
 #pragma mark - master selection
 
 - (void) detectConnectedDevices {
-    if (counter++ >2) {
-        counter = 0;
+    if (detectConnectedCounter++ >2) {
+        detectConnectedCounter = 0;
         [_connectTimer invalidate];
         [_serviceBrowser stop];
         detectConnectedDeviceEnable = false;

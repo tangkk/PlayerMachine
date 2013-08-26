@@ -10,6 +10,18 @@
 #import "Definition.h"
 #import "Drawing.h"
 
+#import "PGMidi/PGMidi.h"
+#import "PGMidi/PGArc.h"
+#import "PGMidi/iOSVersionDetection.h"
+
+#import "MIDINote.h"
+#import "NoteNumDict.h"
+#import "Communicator.h"
+
+// for getting ip address
+#import <ifaddrs.h>
+#import <arpa/inet.h>
+
 @interface PlayerMachineViewController () {
     // Animation
     CGFloat mouseXReg[AnimateArrayLength];
@@ -44,7 +56,7 @@
     
     BOOL longPressed;
     
-    UInt16 counter;
+    UInt16 checkConnectedCounter;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
@@ -59,6 +71,9 @@
 @property (nonatomic, retain) NSTimer *makeSureConnected;
 @property (strong, nonatomic) IBOutlet UILabel *masterConnectedLabel;
 
+// Communication infrastructures
+@property (readonly) NoteNumDict *Dict;
+@property (readwrite) MIDINote *TestNote;
 
 @end
 
@@ -68,7 +83,31 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self viewInit];
     
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    self.instImage.alpha = 1;
+    self.masterConnectedLabel.alpha = 0;
+    [UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.instImage.alpha = 0;} completion:NO];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    // Initialize objects during segue
+    _makeSureConnected = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkIfConnected) userInfo:nil repeats:YES];
+    checkConnectedCounter = 0;
+    [self infrastructureSetup];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - setup routines
+- (void)viewInit {
     red = 255.0/255.0;
     green = 255.0/255.0;
     blue = 255.0/255.0;
@@ -95,28 +134,32 @@
     longPressed = false;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    self.instImage.alpha = 1;
-    self.masterConnectedLabel.alpha = 0;
-    [UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.instImage.alpha = 0;} completion:NO];
+-(void)infrastructureSetup {
+    if (_CMU == nil) {
+        _CMU = [[Communicator alloc] init];
+        [_CMU setAssignmentDelegate:self];
+    }
+    IF_IOS_HAS_COREMIDI(
+                        if (_CMU.midi == nil) {
+                            _CMU.midi = [[PGMidi alloc] init];
+                        }
+                        )
+    if (_Dict == nil) {
+        _Dict = [[NoteNumDict alloc] init];
+    }
+    _TestNote = [[MIDINote alloc] initWithNote:(60) duration:1 channel:0 velocity:80 SysEx:0 Root:kMIDINoteOn];
+    
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    // Initialize objects during segue
-    _makeSureConnected = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkIfConnected) userInfo:nil repeats:YES];
-    counter = 0;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Assignment Handler
+- (void)MIDIAssignment:(const MIDIPacket *)packet {
+    NSLog(@"AssignmentDelegate Called");
 }
 
 #pragma mark - Make Sure Process After Segue
 - (void)checkIfConnected {
-    if (counter++ > 3) {
-        counter = 0;
+    if (checkConnectedCounter++ > 3) {
+        checkConnectedCounter = 0;
         [_makeSureConnected invalidate];
         if (*_masterConnected) {
             [UIView animateWithDuration:1 animations:^{self.masterConnectedLabel.alpha = 1;}];
@@ -207,7 +250,9 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
 
 #pragma mark - note Play
 - (void)playNoteinPos:(UInt16)Pos {
-    
+    //CHECK: CMU
+    NSLog(@"PlayNotes");
+    [_CMU sendMidiData:_TestNote];
 }
 
 #pragma mark - Timer Triggered Function
