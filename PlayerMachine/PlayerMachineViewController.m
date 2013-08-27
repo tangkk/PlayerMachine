@@ -76,6 +76,8 @@
 @property (readwrite) MIDINote *TestNote;
 @property (copy) NSString *ownIP;
 @property (assign) UInt8 PlayerChannel;
+@property (readwrite) NSMutableArray *MIDINoteArray;
+@property (assign) BOOL playerEnabled;
 
 @end
 
@@ -149,19 +151,48 @@
         _Dict = [[NoteNumDict alloc] init];
     }
     _PlayerChannel = SteelGuitar;
+    _playerEnabled = false;
     _ownIP = [self getIPAddress];
-    _TestNote = [[MIDINote alloc] initWithNote:(60) duration:1 channel:0 velocity:80 SysEx:0 Root:kMIDINoteOn];
+    _TestNote = [[MIDINote alloc] initWithNote:48 duration:1 channel:0 velocity:80 SysEx:0 Root:kMIDINoteOn];
+    
+    if (_MIDINoteArray == nil) {
+        _MIDINoteArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 22; i++) {
+            MIDINote *M = [[MIDINote alloc] initWithNote:48 duration:1 channel:_PlayerChannel velocity:75 SysEx:0 Root:kMIDINoteOn];
+            [_MIDINoteArray addObject:M];
+        }
+    }
     
 }
 
-#pragma mark - Assignment Handler
+#pragma mark - Assignment Handler (delegate)
 - (void)MIDIAssignment:(const MIDIPacket *)packet {
     NSLog(@"AssignmentDelegate Called");
     // handle sysEx messages which is an assignment from the master to players
     // The packet should contain more than 3 bytes of data, where the second byte is 0x7D the
     // manufacturer ID for educational use, the first byte is 0xF0, the last byte is 0xF7
     if (packet->length == 11) {
-        NSLog(@"deals with assignment");
+        NSLog(@"deals with normal assignment");
+        for (int i = 2; i < 10; i++) {
+            UInt8 AssignNum = packet->data[i];
+            NSNumber *AssignNSNum = [NSNumber numberWithUnsignedChar:AssignNum];
+            NSArray *noteNameArr = [_Dict.Dict allKeysForObject:AssignNSNum];
+            NSString *noteName = [noteNameArr objectAtIndex:0];
+            
+            if (noteName) {
+                NSLog(@"The noteName %@", noteName);
+                NSNumber *noteNum = [_Dict.Dict objectForKey:noteName];
+                UInt8 note = [noteNum unsignedShortValue];
+                [[_MIDINoteArray objectAtIndex: 7- (i- 2)] setNote:note];
+                [[_MIDINoteArray objectAtIndex: 14 - (i- 2)] setNote:note - 12];
+                [[_MIDINoteArray objectAtIndex: 21 - (i- 2)] setNote:note - 24];
+                [[_MIDINoteArray objectAtIndex:7-(i-2)] setChannel:_PlayerChannel];
+                [[_MIDINoteArray objectAtIndex:14-(i-2)] setChannel:_PlayerChannel];
+                [[_MIDINoteArray objectAtIndex:21-(i-2)] setChannel:_PlayerChannel];
+            }
+        }
+        _playerEnabled = true;
+        
     } else if (packet->length == 12) {
         NSLog(@"deas with channel mapping broadcast");
         UInt8 add1 = (packet->data[2]) << 4 | packet->data[3];
@@ -179,7 +210,13 @@
         if (add1 == (UInt8)ad1 && add2 == (UInt8)ad2 && add3 == (UInt8)ad3 && add4 == (UInt8)ad4) {
             _PlayerChannel = packet->data[10];
             NSLog(@"Player Channel is: %d", _PlayerChannel);
+            for (MIDINote *M in _MIDINoteArray) {
+                [M setChannel:_PlayerChannel];
+            }
         }
+    } else if (packet->length == 4) {
+        NSLog(@"deals with stop jamming");
+        _playerEnabled = false;
     }
 }
 
@@ -247,7 +284,6 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
     
     // Play the note, which is determined by the y position and how many notes are within the screen size
     notePos = lastPoint.y * noteSize / height;
-    DSLog(@"notePos = %d", notePos);
     [self playNoteinPos:notePos];
     
     [self tracePressedwithPos:lastPoint.x and:lastPoint.y notePos:notePos];
@@ -297,11 +333,11 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
     
 }
 
-#pragma mark - note Play
+#pragma mark - Play Note
 - (void)playNoteinPos:(UInt16)Pos {
-    //CHECK: CMU
-    NSLog(@"PlayNotes");
-    [_CMU sendMidiData:_TestNote];
+    if (_playerEnabled) {
+        [_CMU sendMidiData:[_MIDINoteArray objectAtIndex:Pos]];
+    }
 }
 
 #pragma mark - Timer Triggered Function
