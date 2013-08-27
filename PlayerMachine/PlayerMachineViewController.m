@@ -74,6 +74,8 @@
 // Communication infrastructures
 @property (readonly) NoteNumDict *Dict;
 @property (readwrite) MIDINote *TestNote;
+@property (copy) NSString *ownIP;
+@property (assign) UInt8 PlayerChannel;
 
 @end
 
@@ -84,7 +86,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self viewInit];
-    
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -140,13 +141,15 @@
         [_CMU setAssignmentDelegate:self];
     }
     IF_IOS_HAS_COREMIDI(
-                        if (_CMU.midi == nil) {
-                            _CMU.midi = [[PGMidi alloc] init];
-                        }
-                        )
+        if (_CMU.midi == nil) {
+            _CMU.midi = [[PGMidi alloc] init];
+        }
+    )
     if (_Dict == nil) {
         _Dict = [[NoteNumDict alloc] init];
     }
+    _PlayerChannel = SteelGuitar;
+    _ownIP = [self getIPAddress];
     _TestNote = [[MIDINote alloc] initWithNote:(60) duration:1 channel:0 velocity:80 SysEx:0 Root:kMIDINoteOn];
     
 }
@@ -154,6 +157,58 @@
 #pragma mark - Assignment Handler
 - (void)MIDIAssignment:(const MIDIPacket *)packet {
     NSLog(@"AssignmentDelegate Called");
+    // handle sysEx messages which is an assignment from the master to players
+    // The packet should contain more than 3 bytes of data, where the second byte is 0x7D the
+    // manufacturer ID for educational use, the first byte is 0xF0, the last byte is 0xF7
+    if (packet->length == 11) {
+        NSLog(@"deals with assignment");
+    } else if (packet->length == 12) {
+        NSLog(@"deas with channel mapping broadcast");
+        UInt8 add1 = (packet->data[2]) << 4 | packet->data[3];
+        UInt8 add2 = (packet->data[4]) << 4 | packet->data[5];
+        UInt8 add3 = (packet->data[6]) << 4 | packet->data[7];
+        UInt8 add4 = (packet->data[8]) << 4 | packet->data[9];
+        
+        NSArray *Arr;
+        Arr = [_ownIP componentsSeparatedByString:@"."];
+        int ad1 = [Arr[0] intValue];
+        int ad2 = [Arr[1] intValue];
+        int ad3 = [Arr[2] intValue];
+        int ad4 = [Arr[3] intValue];
+        // Check if the IP address match, if true, get the channel number inside the packet.
+        if (add1 == (UInt8)ad1 && add2 == (UInt8)ad2 && add3 == (UInt8)ad3 && add4 == (UInt8)ad4) {
+            _PlayerChannel = packet->data[10];
+            NSLog(@"Player Channel is: %d", _PlayerChannel);
+        }
+    }
+}
+
+// The following code is adapted from the stackflow Q&A website:
+// http://stackoverflow.com/questions/7072989/iphone-ipad-how-to-get-my-ip-address-programmatically
+- (NSString *)getIPAddress {
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
 }
 
 #pragma mark - Make Sure Process After Segue
@@ -209,12 +264,6 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.view];
     mouseSwiped = YES;
-    
-    // Change color according to pos
-//    red = currentPoint.x / self.view.frame.size.width;
-//    green = currentPoint.y / self.view.frame.size.height;
-//    blue = 1;
-//    [Drawing drawLineWithPreviousPoint:lastPoint CurrentPoint:currentPoint onImage:self.mainImage withbrush:brush Red:red Green:green Blue:blue Alpha:opacity Size:self.view.frame.size];
     
     CGPoint middlePoint = midPoint(lastPoint, currentPoint);
     [path addQuadCurveToPoint:middlePoint controlPoint:lastPoint];
@@ -320,11 +369,6 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
     
     // do water effect
     for (int i = 0; i < AnimateArrayLength; i++) {
-        // Change color according to pos
-//        red = mouseXReg[i] / self.view.frame.size.width;
-//        green = mouseYReg[i] / self.view.frame.size.height;
-//        blue = 1;
-
         if (animate[i]) {
             tick[i]++;
             if (tick[i] > 45) {

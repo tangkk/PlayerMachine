@@ -38,15 +38,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORO-iL-7Zm">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="63" id="JEK-j6-J2O"/>
-                                    <constraint firstAttribute="height" constant="21" id="lND-Ro-A1P"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="23"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXk-hL-gwt">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="qov-Wq-fHK"/>
@@ -76,16 +67,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QXk-hL-gwt" firstAttribute="centerX" secondItem="ORO-iL-7Zm" secondAttribute="centerX" type="default" id="5Ba-mJ-VZK"/>
-                            <constraint firstItem="QXk-hL-gwt" firstAttribute="centerX" secondItem="eZm-Os-gX3" secondAttribute="centerX" type="default" id="6KX-B6-FJl"/>
-                            <constraint firstItem="QXk-hL-gwt" firstAttribute="top" secondItem="xZt-f4-bnC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="EVz-Ye-bFb"/>
                             <constraint firstItem="QXk-hL-gwt" firstAttribute="trailing" secondItem="N4e-wq-kr3" secondAttribute="trailing" type="default" id="FhP-65-AuQ"/>
-                            <constraint firstItem="ORO-iL-7Zm" firstAttribute="centerX" secondItem="vKa-Ce-d6d" secondAttribute="centerX" type="default" id="QaJ-fD-xVt"/>
+                            <constraint firstItem="xZt-f4-bnC" firstAttribute="centerX" secondItem="QXk-hL-gwt" secondAttribute="centerX" type="default" id="MCx-K8-Nvm"/>
                             <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerY" secondItem="eZm-Os-gX3" secondAttribute="centerY" type="default" id="SvR-T8-vkb"/>
+                            <constraint firstItem="xZt-f4-bnC" firstAttribute="centerX" secondItem="eZm-Os-gX3" secondAttribute="centerX" type="default" id="T9e-70-brI"/>
+                            <constraint firstItem="xZt-f4-bnC" firstAttribute="top" secondItem="vKa-Ce-d6d" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Xou-1n-pcR"/>
                             <constraint firstItem="vKa-Ce-d6d" firstAttribute="top" secondItem="N4e-wq-kr3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="oQX-b4-Qza"/>
                             <constraint firstAttribute="bottom" secondItem="QXk-hL-gwt" secondAttribute="bottom" constant="57" id="sKt-cl-Isv"/>
-                            <constraint firstItem="xZt-f4-bnC" firstAttribute="leading" secondItem="ORO-iL-7Zm" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="thA-oN-6DF"/>
-                            <constraint firstItem="ORO-iL-7Zm" firstAttribute="top" secondItem="vKa-Ce-d6d" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uJj-uH-cMc"/>
+                            <constraint firstItem="xZt-f4-bnC" firstAttribute="centerX" secondItem="vKa-Ce-d6d" secondAttribute="centerX" type="default" id="sUH-Fb-fVo"/>
                             <constraint firstItem="QXk-hL-gwt" firstAttribute="leading" secondItem="N4e-wq-kr3" secondAttribute="leading" type="default" id="ue5-is-gSo"/>
                         </constraints>
                     </view>
@@ -94,7 +83,6 @@
                         <outlet property="JAM" destination="vKa-Ce-d6d" id="2oW-HZ-hHr"/>
                         <outlet property="WI" destination="N4e-wq-kr3" id="xgz-4W-ykk"/>
                         <outlet property="masterName" destination="QXk-hL-gwt" id="vXs-Bi-CAm"/>
-                        <outlet property="with" destination="ORO-iL-7Zm" id="3qM-OM-0GP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kJ-e9-FFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -278,8 +266,6 @@
         <class className="AdvancedPlayer" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedPlayer.h"/>
             <relationships>
-                <relationship kind="action" name="LongPressed:"/>
-                <relationship kind="action" name="backToSimple:"/>
                 <relationship kind="outlet" name="SimpleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="mainImage" candidateClass="UIImageView"/>
             </relationships>
@@ -310,7 +296,6 @@
                 <relationship kind="outlet" name="JAM" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WI" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="masterName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="with" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>

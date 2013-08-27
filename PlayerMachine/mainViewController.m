@@ -31,7 +31,6 @@
 @property (nonatomic, retain) NSTimer *connectTimer;
 
 // UI Objects
-@property (strong, nonatomic) IBOutlet UILabel *with;
 @property (strong, nonatomic) IBOutlet UILabel *masterName;
 @property (strong, nonatomic) NSMutableArray *deviceArray;
 @property (strong, nonatomic) IBOutlet UIButton *Down;
@@ -46,9 +45,9 @@
 @implementation mainViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.WI.alpha = 0; self.JAM.alpha = 0; self.with.alpha = 0; self.masterName.alpha = 0;  self.Down.alpha = 0;
+    self.WI.alpha = 0; self.JAM.alpha = 0; self.masterName.alpha = 0;  self.Down.alpha = 0;
     [UIView animateWithDuration:2 animations:
-     ^{self.WI.alpha = 1; self.JAM.alpha = 1; self.with.alpha = 1; self.masterName.alpha = 1;  self.Down.alpha = 1;}];
+     ^{self.WI.alpha = 1; self.JAM.alpha = 1; self.masterName.alpha = 1;  self.Down.alpha = 1;}];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -135,7 +134,6 @@
     if (detectConnectedCounter++ >2) {
         detectConnectedCounter = 0;
         [_connectTimer invalidate];
-        [_serviceBrowser stop];
         detectConnectedDeviceEnable = false;
         NSLog(@"Connected to %u devices:", [_Session.connections count]);
         for (MIDINetworkConnection *conn in _Session.connections) {
