@@ -70,7 +70,7 @@
 
 // The objects used during segue
 @property (nonatomic, retain) NSTimer *makeSureConnected;
-@property (strong, nonatomic) IBOutlet UILabel *masterConnectedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *feedbackLabel;
 
 // Communication infrastructures
 @property (readonly) NoteNumDict *Dict;
@@ -80,6 +80,10 @@
 @property (assign) UInt8 playerID;
 @property (readwrite) NSMutableArray *MIDINoteArray;
 @property (assign) BOOL playerEnabled;
+
+// Scoring and feedback
+- (void) scoringMeAndTeam:(NSNumber *)mixScore;
+- (void) cueFeedback:(NSNumber *)cue;
 
 @end
 
@@ -94,7 +98,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     self.instImage.alpha = 1;
-    self.masterConnectedLabel.alpha = 0;
+    self.feedbackLabel.alpha = 0;
     [UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.instImage.alpha = 0;} completion:NO];
 }
 
@@ -197,7 +201,6 @@
         _playerEnabled = true;
         
     } else if (packet->length == 13) {
-        NSLog(@"deas with channel and ID mapping broadcast");
         UInt8 add1 = (packet->data[2]) << 4 | packet->data[3];
         UInt8 add2 = (packet->data[4]) << 4 | packet->data[5];
         UInt8 add3 = (packet->data[6]) << 4 | packet->data[7];
@@ -211,13 +214,30 @@
         int ad4 = [Arr[3] intValue];
         // Check if the IP address match, if true, get the channel number inside the packet.
         if (add1 == (UInt8)ad1 && add2 == (UInt8)ad2 && add3 == (UInt8)ad3 && add4 == (UInt8)ad4) {
-            _playerChannel = packet->data[10];
-            _playerID = packet->data[11];
-            NSLog(@"Player Channel is: %d", _playerChannel);
-            NSLog(@"Player ID is: %d", _playerID);
-            for (MIDINote *M in _MIDINoteArray) {
-                [M setChannel:_playerChannel];
-                [M setID:_playerID];
+            UInt8 Root = packet->data[10];
+            if (Root < 10) {
+                NSLog(@"deal with channel and ID mapping broadcast");
+                _playerChannel = Root;
+                _playerID = packet->data[11];
+                NSLog(@"Player Channel is: %d", _playerChannel);
+                NSLog(@"Player ID is: %d", _playerID);
+                for (MIDINote *M in _MIDINoteArray) {
+                    [M setChannel:_playerChannel];
+                    [M setID:_playerID];
+                }
+            } else if (Root < 60 && Root > 10) {
+                NSNumber *cue = [NSNumber numberWithUnsignedChar:(Root - 50)];
+                [self performSelectorInBackground:@selector(cueFeedback:) withObject:cue];
+                
+            } else {
+                UInt8 myScore = Root;
+                UInt8 overallScore = packet->data[11];
+                NSLog(@"deal with score feedback");
+                NSLog(@"player score = %d", myScore);
+                NSLog(@"overall score = %d", overallScore);
+                UInt16 score = overallScore << 8 | myScore;
+                NSNumber *mixScore = [NSNumber numberWithUnsignedShort:score];
+                [self performSelectorInBackground:@selector(scoringMeAndTeam:) withObject:mixScore];
             }
         }
     } else if (packet->length == 4) {
@@ -256,16 +276,71 @@
 
 #pragma mark - Make Sure Process After Segue
 - (void)checkIfConnected {
-    if (checkConnectedCounter++ > 3) {
+    if (checkConnectedCounter++ > 2) {
         checkConnectedCounter = 0;
         [_makeSureConnected invalidate];
         if (*_masterConnected) {
-            [UIView animateWithDuration:1 animations:^{self.masterConnectedLabel.alpha = 1;}];
-            [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.masterConnectedLabel.alpha = 0;} completion:NO];
+            [UIView animateWithDuration:1 animations:^{self.feedbackLabel.alpha = 1;}];
+            [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
         } else {
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
+}
+
+#pragma mark - Scoring and cue feedback
+
+- (void) scoringMeAndTeam:(NSNumber *)mixScore {
+    UInt16 mix = [mixScore unsignedShortValue];
+    UInt8 myScore = mix & 0x00FF;
+    UInt8 overallScore = (mix & 0xFF00) >> 8;
+    NSLog(@"myScore = %d", myScore);
+    NSLog(@"overallScore = %d", overallScore);
+    [self feebackAnimatewithString:[NSString stringWithFormat:@"Me/Team: %d/%d", myScore, overallScore]];
+//    _feedbackLabel.text = [NSString stringWithFormat:@"Me/Team: %d/%d", myScore, overallScore];
+//    [UIView animateWithDuration:1 animations:^{_feedbackLabel.alpha = 1;}];
+//    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{_feedbackLabel.alpha = 0;} completion:NO];
+}
+
+- (void) cueFeedback:(NSNumber *)cue {
+    UInt8 Cue = [cue unsignedCharValue];
+    NSString *CueString;
+    switch (Cue) {
+        case 0:
+            CueString = @"Good";
+            break;
+        case 1:
+            CueString = @"Slow";
+            break;
+        case 2:
+            CueString = @"Fast";
+            break;
+        case 3:
+            CueString = @"OK";
+            break;
+        case 4:
+            CueString = @"High";
+            break;
+        case 5:
+            CueString = @"Low";
+            break;
+        case 6:
+            CueString = @"Strong";
+            break;
+        case 7:
+            CueString = @"Calm";
+            break;
+            
+        default:
+            break;
+    }
+    [self feebackAnimatewithString:CueString];
+}
+
+- (void) feebackAnimatewithString:(NSString *)feedback {
+    _feedbackLabel.text = feedback;
+    [UIView animateWithDuration:1 animations:^{_feedbackLabel.alpha = 1;}];
+    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{_feedbackLabel.alpha = 0;} completion:NO];
 }
 
 #pragma mark - Drawing
@@ -481,13 +556,14 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
 }
 
 - (IBAction)LongPressed:(id)sender {
-    if (!_playerEnabled) {
+    if (_playerChannel != Ensemble) {
         DSLog(@"LongPressed");
         [UIView animateWithDuration:1 animations:^{self.IMAdvanced.alpha = 1;}];
         [UIView animateWithDuration:1 animations:^{self.QUIT.alpha = 1;}];
         longPressed = true;
     }
 }
+
 - (IBAction)QUIT:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
     [UIView animateWithDuration:1 animations:^{self.IMAdvanced.alpha = 0;}];

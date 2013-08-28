@@ -164,9 +164,9 @@
                     </view>
                     <connections>
                         <outlet property="QUIT" destination="TFW-A4-Zgu" id="V9M-eS-UWR"/>
+                        <outlet property="feedbackLabel" destination="s63-Kf-cHW" id="h0P-0c-UmR"/>
                         <outlet property="instImage" destination="ikV-5l-Mr4" id="jzg-df-qss"/>
                         <outlet property="mainImage" destination="vj9-m0-T1X" id="Wpa-dY-n01"/>
-                        <outlet property="masterConnectedLabel" destination="s63-Kf-cHW" id="X2N-h0-nCL"/>
                         <outlet property="textLocation" destination="r53-PE-td6" id="bEZ-9v-Aap"/>
                     </connections>
                 </viewController>
@@ -245,6 +245,8 @@
         <class className="AdvancedPlayer" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvancedPlayer.h"/>
             <relationships>
+                <relationship kind="action" name="LongPressed:"/>
+                <relationship kind="action" name="backToSimple:"/>
                 <relationship kind="outlet" name="SimpleButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="mainImage" candidateClass="UIImageView"/>
             </relationships>
@@ -260,9 +262,9 @@
                 <relationship kind="action" name="QUIT:"/>
                 <relationship kind="outlet" name="IMAdvanced" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="QUIT" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="feedbackLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="instImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="mainImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="masterConnectedLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="textLocation" candidateClass="UILabel"/>
             </relationships>
         </class>
