@@ -27,18 +27,6 @@
 #define Root_AA 10
 #define Root_B 11
 
-// Groove names (MIDI note number)
-#define Ballad3 0
-#define Ballad4 1
-#define drum44 2
-#define drum68 3
-#define drumshuffle 4
-#define Funky1 5
-#define Funky2 6
-#define Funky3 7
-#define Rock2 8
-#define Rock3 9
-
 // Instrument names
 #define Loop 0
 #define Trombone 1
@@ -76,9 +64,13 @@ enum {
 @property (assign) UInt8 velocity;
 @property (assign) NSArray *SysEx;
 @property (assign) UInt8 Root;
+@property (assign) UInt8 ID;
 
 
 -(id)initWithNote:(UInt8)note duration:(UInt8)duration channel:(UInt8)channel
          velocity:(UInt8)velocity SysEx:(NSArray *)SysEx Root:(UInt8) Root;
+
+-(id)initWithNote:(UInt8)note duration:(UInt8)duration channel:(UInt8)channel
+         velocity:(UInt8)velocity SysEx:(NSArray *)SysEx Root:(UInt8) Root ID:(UInt8)ID;
 
 @end

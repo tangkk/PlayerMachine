@@ -138,17 +138,19 @@ NSString *StringFromPacket(const MIDIPacket *packet)
     const UInt8 notetype = midiNote.Root;
     const UInt8 channel = [midiNote channel];
     const UInt8 note      = [midiNote note];
-    const UInt8 noteOn[]  = { 0x90|channel, note, [midiNote velocity] };
-    const UInt8 noteOff[] = { 0x80|channel, note, 0   };
-    const UInt8 noteArr[] = {notetype | channel, note, [midiNote velocity] };
+    const UInt8 ID = midiNote.ID;
+    const UInt8 noteSysEx[] = {0xF0, 0x7D, ID, 0xF7};
+    const UInt8 noteOn[]  = { 0x90|channel, note, [midiNote velocity]};
+    const UInt8 noteOff[] = { 0x80|channel, note, 0};
+    const UInt8 noteArr[] = {notetype | channel, note, [midiNote velocity]};
     
-    if (midiNote.Root == kMIDINoteSysEx) {
-        [_midi sendBytes:noteOn size:sizeof(noteOn)];
-    } else if(midiNote.channel == Ensemble) {
+    if(midiNote.channel == Ensemble) {
         [_midi sendBytes:noteArr size:sizeof(noteArr)];
+        [_midi sendBytes:noteSysEx size:sizeof(noteSysEx)];
     } else {
         [_midi sendBytes:noteOn size:sizeof(noteOn)];
-        [NSThread sleepForTimeInterval:1]; // last for 1s
+        [_midi sendBytes:noteSysEx size:sizeof(noteSysEx)];
+        [NSThread sleepForTimeInterval:1.5]; // last for 1s
         [_midi sendBytes:noteOff size:sizeof(noteOff)];
     }
 }

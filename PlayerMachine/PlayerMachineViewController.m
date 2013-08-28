@@ -75,7 +75,8 @@
 @property (readonly) NoteNumDict *Dict;
 @property (readwrite) MIDINote *TestNote;
 @property (copy) NSString *ownIP;
-@property (assign) UInt8 PlayerChannel;
+@property (assign) UInt8 playerChannel;
+@property (assign) UInt8 playerID;
 @property (readwrite) NSMutableArray *MIDINoteArray;
 @property (assign) BOOL playerEnabled;
 
@@ -150,7 +151,8 @@
     if (_Dict == nil) {
         _Dict = [[NoteNumDict alloc] init];
     }
-    _PlayerChannel = SteelGuitar;
+    _playerChannel = SteelGuitar;
+    _playerID = 0xA; //an ID that doesn't exist
     _playerEnabled = false;
     _ownIP = [self getIPAddress];
     _TestNote = [[MIDINote alloc] initWithNote:48 duration:1 channel:0 velocity:80 SysEx:0 Root:kMIDINoteOn];
@@ -158,7 +160,7 @@
     if (_MIDINoteArray == nil) {
         _MIDINoteArray = [[NSMutableArray alloc] init];
         for (int i = 0; i < 22; i++) {
-            MIDINote *M = [[MIDINote alloc] initWithNote:48 duration:1 channel:_PlayerChannel velocity:75 SysEx:0 Root:kMIDINoteOn];
+            MIDINote *M = [[MIDINote alloc] initWithNote:48 duration:1 channel:_playerChannel velocity:75 SysEx:0 Root:kMIDINoteOn];
             [_MIDINoteArray addObject:M];
         }
     }
@@ -186,15 +188,15 @@
                 [[_MIDINoteArray objectAtIndex: 7- (i- 2)] setNote:note];
                 [[_MIDINoteArray objectAtIndex: 14 - (i- 2)] setNote:note - 12];
                 [[_MIDINoteArray objectAtIndex: 21 - (i- 2)] setNote:note - 24];
-                [[_MIDINoteArray objectAtIndex:7-(i-2)] setChannel:_PlayerChannel];
-                [[_MIDINoteArray objectAtIndex:14-(i-2)] setChannel:_PlayerChannel];
-                [[_MIDINoteArray objectAtIndex:21-(i-2)] setChannel:_PlayerChannel];
+                [[_MIDINoteArray objectAtIndex:7-(i-2)] setChannel:_playerChannel];
+                [[_MIDINoteArray objectAtIndex:14-(i-2)] setChannel:_playerChannel];
+                [[_MIDINoteArray objectAtIndex:21-(i-2)] setChannel:_playerChannel];
             }
         }
         _playerEnabled = true;
         
-    } else if (packet->length == 12) {
-        NSLog(@"deas with channel mapping broadcast");
+    } else if (packet->length == 13) {
+        NSLog(@"deas with channel and ID mapping broadcast");
         UInt8 add1 = (packet->data[2]) << 4 | packet->data[3];
         UInt8 add2 = (packet->data[4]) << 4 | packet->data[5];
         UInt8 add3 = (packet->data[6]) << 4 | packet->data[7];
@@ -208,10 +210,13 @@
         int ad4 = [Arr[3] intValue];
         // Check if the IP address match, if true, get the channel number inside the packet.
         if (add1 == (UInt8)ad1 && add2 == (UInt8)ad2 && add3 == (UInt8)ad3 && add4 == (UInt8)ad4) {
-            _PlayerChannel = packet->data[10];
-            NSLog(@"Player Channel is: %d", _PlayerChannel);
+            _playerChannel = packet->data[10];
+            _playerID = packet->data[11];
+            NSLog(@"Player Channel is: %d", _playerChannel);
+            NSLog(@"Player ID is: %d", _playerID);
             for (MIDINote *M in _MIDINoteArray) {
-                [M setChannel:_PlayerChannel];
+                [M setChannel:_playerChannel];
+                [M setID:_playerID];
             }
         }
     } else if (packet->length == 4) {
