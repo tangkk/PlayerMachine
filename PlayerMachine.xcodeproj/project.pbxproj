@@ -16,7 +16,6 @@
 		901E8CF717C5FD4D006E1913 /* ScaleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 901E8CF617C5FD4D006E1913 /* ScaleButton.png */; };
 		901E8CF917C5FD56006E1913 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 901E8CF817C5FD56006E1913 /* Triangle.png */; };
 		901E8CFE17C60F59006E1913 /* Triangle_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 901E8CFD17C60F59006E1913 /* Triangle_180.png */; };
-		902E407917C200C80038DEDD /* QUIT.png in Resources */ = {isa = PBXBuildFile; fileRef = 902E407817C200C80038DEDD /* QUIT.png */; };
 		902E407B17C200D20038DEDD /* WIJAM.png in Resources */ = {isa = PBXBuildFile; fileRef = 902E407A17C200D20038DEDD /* WIJAM.png */; };
 		9035444717BF7D4000881C6B /* Drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9035444617BF7D4000881C6B /* Drawing.m */; };
 		903770E917C0C91200F42DFA /* Simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 903770E817C0C91200F42DFA /* Simple.png */; };
@@ -41,6 +40,7 @@
 		9094414117BB286800F3A0FD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9094414017BB286800F3A0FD /* Default-568h@2x.png */; };
 		9094414417BB286800F3A0FD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9094414217BB286800F3A0FD /* MainStoryboard.storyboard */; };
 		9094414717BB286800F3A0FD /* PlayerMachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094414617BB286800F3A0FD /* PlayerMachineViewController.m */; };
+		90997FBC17CDDC71001CE5C6 /* QUIT.png in Resources */ = {isa = PBXBuildFile; fileRef = 90997FBB17CDDC71001CE5C6 /* QUIT.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +60,6 @@
 		901E8CF617C5FD4D006E1913 /* ScaleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScaleButton.png; sourceTree = "<group>"; };
 		901E8CF817C5FD56006E1913 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle.png; sourceTree = "<group>"; };
 		901E8CFD17C60F59006E1913 /* Triangle_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle_180.png; sourceTree = "<group>"; };
-		902E407817C200C80038DEDD /* QUIT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QUIT.png; sourceTree = "<group>"; };
 		902E407A17C200D20038DEDD /* WIJAM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WIJAM.png; sourceTree = "<group>"; };
 		9035444517BF7D4000881C6B /* Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawing.h; sourceTree = "<group>"; };
 		9035444617BF7D4000881C6B /* Drawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Drawing.m; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		9094414317BB286800F3A0FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		9094414517BB286800F3A0FD /* PlayerMachineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerMachineViewController.h; sourceTree = "<group>"; };
 		9094414617BB286800F3A0FD /* PlayerMachineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerMachineViewController.m; sourceTree = "<group>"; };
+		90997FBB17CDDC71001CE5C6 /* QUIT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QUIT.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,11 +192,11 @@
 		9094413117BB286800F3A0FD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				90997FBB17CDDC71001CE5C6 /* QUIT.png */,
 				901E8CFD17C60F59006E1913 /* Triangle_180.png */,
 				901E8CF817C5FD56006E1913 /* Triangle.png */,
 				901E8CF617C5FD4D006E1913 /* ScaleButton.png */,
 				902E407A17C200D20038DEDD /* WIJAM.png */,
-				902E407817C200C80038DEDD /* QUIT.png */,
 				903770EA17C0CA8500F42DFA /* Draw2Play.png */,
 				903770E817C0C91200F42DFA /* Simple.png */,
 				905E2D4417C088250020AAFB /* Advanced.png */,
@@ -275,11 +275,11 @@
 				905E2D4517C088250020AAFB /* Advanced.png in Resources */,
 				903770E917C0C91200F42DFA /* Simple.png in Resources */,
 				903770EB17C0CA8500F42DFA /* Draw2Play.png in Resources */,
-				902E407917C200C80038DEDD /* QUIT.png in Resources */,
 				902E407B17C200D20038DEDD /* WIJAM.png in Resources */,
 				901E8CF717C5FD4D006E1913 /* ScaleButton.png in Resources */,
 				901E8CF917C5FD56006E1913 /* Triangle.png in Resources */,
 				901E8CFE17C60F59006E1913 /* Triangle_180.png in Resources */,
+				90997FBC17CDDC71001CE5C6 /* QUIT.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

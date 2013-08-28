@@ -32,6 +32,7 @@
     // notePosition
     UInt16 notePos;
     UInt16 notePosReg[AnimateArrayLength];
+    UInt8 velPos;
     
     // the size parameter of the screen
     CGFloat width;
@@ -289,8 +290,8 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
     
     // Play the note, which is determined by the y position and how many notes are within the screen size
     notePos = lastPoint.y * noteSize / height;
-    [self playNoteinPos:notePos];
-    
+    velPos = lastPoint.x *127 / width;
+    [self playNoteinPos:notePos withVelocity:velPos andType:kMIDINoteOn];
     [self tracePressedwithPos:lastPoint.x and:lastPoint.y notePos:notePos];
 }
 
@@ -325,9 +326,11 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
     if (RegValid) {
         if ([self isStationary]) {
             RegValid = NO;
-            notePos = lastPoint.y * noteSize / height;
-            [self playNoteinPos:notePos];
-            
+            if (_playerChannel != Ensemble) {
+                notePos = lastPoint.y * noteSize / height;
+                velPos = lastPoint.x * 127 / width;
+                [self playNoteinPos:notePos withVelocity:velPos andType:kMIDINoteOn];
+            }
             [self tracePressedwithPos:currentPoint.x and:currentPoint.y notePos:notePos];
         }
     }
@@ -335,13 +338,17 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
 
 // mouseReleased
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+    if (_playerChannel == Ensemble) {
+        [self playNoteinPos:notePos withVelocity:0 andType:kMIDINoteOff];
+    }
 }
 
 #pragma mark - Play Note
-- (void)playNoteinPos:(UInt16)Pos {
+- (void)playNoteinPos:(UInt16)Pos withVelocity:(UInt8)Vel andType:(UInt8)Type{
     if (_playerEnabled) {
-        [_CMU sendMidiData:[_MIDINoteArray objectAtIndex:Pos]];
+        MIDINote *M = [_MIDINoteArray objectAtIndex:Pos];
+        [M setVelocity:Vel];
+        [_CMU sendMidiData:M];
     }
 }
 
@@ -474,11 +481,12 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
 }
 
 - (IBAction)LongPressed:(id)sender {
-    DSLog(@"LongPressed");
-    [UIView animateWithDuration:1 animations:^{self.IMAdvanced.alpha = 1;}];
-    [UIView animateWithDuration:1 animations:^{self.QUIT.alpha = 1;}];
-    longPressed = true;
-
+    if (!_playerEnabled) {
+        DSLog(@"LongPressed");
+        [UIView animateWithDuration:1 animations:^{self.IMAdvanced.alpha = 1;}];
+        [UIView animateWithDuration:1 animations:^{self.QUIT.alpha = 1;}];
+        longPressed = true;
+    }
 }
 - (IBAction)QUIT:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
