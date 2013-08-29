@@ -39,10 +39,10 @@
 
 #pragma mark - Drawing
 
-- (void) drawCircleWithCenter:(CGPoint)center Radius:(CGFloat)radius onImage:(UIImageView *)Img withbrush:(UInt16)brush
-                          Red:(CGFloat)red Green:(CGFloat)green Blue:(CGFloat)blue Alpha:(CGFloat)opacity {
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [Img.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
++ (void) drawCircleWithCenter:(CGPoint)center Radius:(CGFloat)radius onImage:(UIImageView *)Img withbrush:(UInt16)brush
+                          Red:(CGFloat)red Green:(CGFloat)green Blue:(CGFloat)blue Alpha:(CGFloat)opacity  Size:(CGSize)size{
+    UIGraphicsBeginImageContext(size);
+    [Img.image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
     CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
     CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
@@ -54,10 +54,10 @@
     UIGraphicsEndImageContext();
 }
 
-- (void) drawLineWithPreviousPoint:(CGPoint)PP CurrentPoint:(CGPoint)CP onImage:(UIImageView *)Img withbrush:(UInt16)brush
-                               Red:(CGFloat)red Green:(CGFloat)green Blue:(CGFloat)blue Alpha:(CGFloat)opacity {
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [Img.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
++ (void) drawLineWithPreviousPoint:(CGPoint)PP CurrentPoint:(CGPoint)CP onImage:(UIImageView *)Img withbrush:(UInt16)brush
+                               Red:(CGFloat)red Green:(CGFloat)green Blue:(CGFloat)blue Alpha:(CGFloat)opacity Size:(CGSize)size{
+    UIGraphicsBeginImageContext(size);
+    [Img.image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     CGContextMoveToPoint(UIGraphicsGetCurrentContext(), PP.x, PP.y);
     CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), CP.x, CP.y);
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);

@@ -27,7 +27,7 @@
 // Network Service related declaraion
 @property (strong, nonatomic) NSMutableArray *services;
 @property (strong, nonatomic) NSNetServiceBrowser *serviceBrowser;
-@property (readwrite) MIDINetworkSession *Session;
+@property (strong, nonatomic) MIDINetworkSession *Session;
 @property (nonatomic, retain) NSTimer *connectTimer;
 
 // UI Objects
@@ -98,17 +98,12 @@
 
 - (void) netServiceBrowser:(NSNetServiceBrowser*)serviceBrowser didFindService:(NSNetService *)service moreComing:(BOOL)moreComing {
     // Also add self service, but ensure that service with a same name can also be added
-    NSLog(@"didFindService..................................");
+    NSLog(@"didFindService.................................. %@", service.name);
     [self.services addObject:service];
-    
-    
-    if ([service.name  isEqualToString:_Session.networkName]) {
-        NSLog(@"Self Service!");
-    }
 }
 
 - (void) netServiceBrowser:(NSNetServiceBrowser*)serviceBrowser didRemoveService:(NSNetService *)service moreComing:(BOOL)moreComing {
-    NSLog(@"didRemoveService..................................");
+    NSLog(@"didRemoveService..................................%@", service.name);
     MIDINetworkHost *host = [MIDINetworkHost hostWithName:[service name] netService:service];
     MIDINetworkConnection *connection = [MIDINetworkConnection connectionWithHost:host];
     if (connection) {
@@ -133,28 +128,23 @@
 - (void) detectConnectedDevices {
     if (detectConnectedCounter++ >2) {
         detectConnectedCounter = 0;
-        [_connectTimer invalidate];
-        detectConnectedDeviceEnable = false;
-        NSLog(@"Connected to %u devices:", [_Session.connections count]);
-        for (MIDINetworkConnection *conn in _Session.connections) {
-            NSLog(@"Connected to: %@", conn.host.name);
-            NSLog(@"mainViewController ends here");
+        if (_Session.connections.count > 0) {
             masterConnected = true;
+            NSLog(@"Connected......");
+        } else {
+            masterConnected = false;
         }
-        NSLog(@"\n");
     }
 }
 
 - (void) scanServices {
-    NSLog(@"scanServices...");
-    
     if (detectConnectedDeviceEnable) {
         [self detectConnectedDevices];
     }
     
     [_deviceArray removeAllObjects];
     for (NSNetService *Service in self.services) {
-        NSLog(@"name: %@", Service.name);
+        DSLog(@"name: %@", Service.name);
         [_deviceArray addObject:Service.name];
     }
     [_deviceArray addObject:@"..."];

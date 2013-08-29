@@ -22,6 +22,8 @@
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 
+#import "AdvancedPlayer.h"
+
 @interface PlayerMachineViewController () {
     // Animation
     CGFloat mouseXReg[AnimateArrayLength];
@@ -56,6 +58,7 @@
     BOOL mouseSwiped;
     
     BOOL longPressed;
+    BOOL animateEnabled;
     
     UInt16 checkConnectedCounter;
 }
@@ -73,17 +76,20 @@
 @property (strong, nonatomic) IBOutlet UILabel *feedbackLabel;
 
 // Communication infrastructures
+@property (strong, nonatomic) Communicator *CMU;
 @property (readonly) NoteNumDict *Dict;
-@property (readwrite) MIDINote *TestNote;
 @property (copy) NSString *ownIP;
 @property (assign) UInt8 playerChannel;
 @property (assign) UInt8 playerID;
-@property (readwrite) NSMutableArray *MIDINoteArray;
+@property (strong, nonatomic) NSMutableArray *MIDINoteArray;
 @property (assign) BOOL playerEnabled;
 
 // Scoring and feedback
 - (void) scoringMeAndTeam:(NSNumber *)mixScore;
 - (void) cueFeedback:(NSNumber *)cue;
+
+// Segue for advance player
+@property (strong, nonatomic) AdvancedPlayer *Adp;
 
 @end
 
@@ -94,6 +100,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self viewInit];
+    [self infrastructureSetup];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -106,7 +113,6 @@
     // Initialize objects during segue
     _makeSureConnected = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkIfConnected) userInfo:nil repeats:YES];
     checkConnectedCounter = 0;
-    [self infrastructureSetup];
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,7 +166,8 @@
     _playerID = 0xA; //an ID that doesn't exist
     _playerEnabled = false;
     _ownIP = [self getIPAddress];
-    _TestNote = [[MIDINote alloc] initWithNote:48 duration:1 channel:0 velocity:80 SysEx:0 Root:kMIDINoteOn];
+    
+    animateEnabled = true;
     
     if (_MIDINoteArray == nil) {
         _MIDINoteArray = [[NSMutableArray alloc] init];
@@ -278,12 +285,24 @@
 - (void)checkIfConnected {
     if (checkConnectedCounter++ > 2) {
         checkConnectedCounter = 0;
-        [_makeSureConnected invalidate];
-        if (*_masterConnected) {
+        //[_makeSureConnected invalidate];
+        if (*_masterConnected && !_playerEnabled) {
+            animateEnabled = true;
             [UIView animateWithDuration:1 animations:^{self.feedbackLabel.alpha = 1;}];
             [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
+            _feedbackLabel.text = @"Wating for Master...";
+        } else if (_playerEnabled) {
+            if (animateEnabled) {
+                _feedbackLabel.text = @"Start to Jam...";
+                [UIView animateWithDuration:1 animations:^{self.feedbackLabel.alpha = 1;}];
+                [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
+            }
+            animateEnabled = false;
         } else {
+#ifndef VIEWTEST
+            animateEnabled = true;
             [self dismissViewControllerAnimated:YES completion:nil];
+#endif
         }
     }
 }
@@ -296,10 +315,11 @@
     UInt8 overallScore = (mix & 0xFF00) >> 8;
     NSLog(@"myScore = %d", myScore);
     NSLog(@"overallScore = %d", overallScore);
-    [self feebackAnimatewithString:[NSString stringWithFormat:@"Me/Team: %d/%d", myScore, overallScore]];
-//    _feedbackLabel.text = [NSString stringWithFormat:@"Me/Team: %d/%d", myScore, overallScore];
-//    [UIView animateWithDuration:1 animations:^{_feedbackLabel.alpha = 1;}];
-//    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{_feedbackLabel.alpha = 0;} completion:NO];
+    NSString *Score = [NSString stringWithFormat:@"Me/Team: %d/%d", myScore, overallScore];
+    [self feebackAnimatewithString: Score];
+    if (_Adp) {
+        [_Adp feebackAnimatewithString:Score];
+    }
 }
 
 - (void) cueFeedback:(NSNumber *)cue {
@@ -335,9 +355,13 @@
             break;
     }
     [self feebackAnimatewithString:CueString];
+    if (_Adp) {
+        [_Adp feebackAnimatewithString:CueString];
+    }
 }
 
 - (void) feebackAnimatewithString:(NSString *)feedback {
+    _feedbackLabel.alpha = 0;
     _feedbackLabel.text = feedback;
     [UIView animateWithDuration:1 animations:^{_feedbackLabel.alpha = 1;}];
     [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{_feedbackLabel.alpha = 0;} completion:NO];
@@ -549,7 +573,15 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
     }
 }
 
-#pragma mark - Tap Gesture Recognizer
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    _Adp = (AdvancedPlayer *)segue.destinationViewController;
+    _Adp.CMU = _CMU;
+    _Adp.playerChannel = &_playerChannel;
+    _Adp.playerID = &_playerID;
+    _Adp.playerEnabled = &_playerEnabled;
+}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     return YES;

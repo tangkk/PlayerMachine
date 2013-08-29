@@ -14,6 +14,5 @@
 
 // The objects used during segue
 @property BOOL *masterConnected;
-@property (readwrite) Communicator *CMU;
 
 @end
