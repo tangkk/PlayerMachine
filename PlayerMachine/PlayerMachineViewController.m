@@ -65,7 +65,6 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
 @property (strong, nonatomic) IBOutlet UILabel *textLocation;
-@property (strong, nonatomic) IBOutlet UIImageView *instImage;
 @property (strong, nonatomic) IBOutlet UIButton *IMAdvanced;
 @property (strong, nonatomic) IBOutlet UIButton *QUIT;
 
@@ -104,9 +103,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    self.instImage.alpha = 1;
     self.feedbackLabel.alpha = 0;
-    [UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.instImage.alpha = 0;} completion:NO];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -138,9 +135,6 @@
     [self clearAnimationArrays];
     [self clearStationCheckReg];
     
-    // Show instruction image
-    self.instImage.image = [UIImage imageNamed:@"Draw2Play.png"];
-    self.instImage.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     self.IMAdvanced.alpha = 0;
     self.QUIT.alpha = 0;
     
@@ -233,13 +227,14 @@
                     [M setID:_playerID];
                 }
             } else if (Root < 60 && Root > 10) {
+                NSLog(@"deal with cue feedback");
                 NSNumber *cue = [NSNumber numberWithUnsignedChar:(Root - 50)];
                 [self performSelectorInBackground:@selector(cueFeedback:) withObject:cue];
                 
             } else {
+                NSLog(@"deal with score feedback");
                 UInt8 myScore = Root;
                 UInt8 overallScore = packet->data[11];
-                NSLog(@"deal with score feedback");
                 NSLog(@"player score = %d", myScore);
                 NSLog(@"overall score = %d", overallScore);
                 UInt16 score = overallScore << 8 | myScore;
@@ -290,10 +285,10 @@
             animateEnabled = true;
             [UIView animateWithDuration:1 animations:^{self.feedbackLabel.alpha = 1;}];
             [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
-            _feedbackLabel.text = @"Wating for Master...";
+            _feedbackLabel.text = @"waiting for Master...";
         } else if (_playerEnabled) {
             if (animateEnabled) {
-                _feedbackLabel.text = @"Start to Jam...";
+                _feedbackLabel.text = @"tap or draw to Jam...";
                 [UIView animateWithDuration:1 animations:^{self.feedbackLabel.alpha = 1;}];
                 [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
             }

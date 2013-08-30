@@ -37,7 +37,6 @@
 
 // master selection declaration
 @property (assign, atomic) UInt16 masterIdx;
-@property (assign, atomic) UInt16 masterCount;
 
 
 @end
@@ -51,7 +50,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    _masterCount = 0;
     _masterIdx = 0;
     _deviceArray = [NSMutableArray arrayWithObjects:@"...", nil];
     _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
@@ -80,14 +78,17 @@
 
 - (void) configureNetworkSessionAndServiceBrowser {
     // configure network session
-    _Session = [MIDINetworkSession defaultSession];
-    _Session.enabled = true;
-    _Session.connectionPolicy = MIDINetworkConnectionPolicy_NoOne;
+    if (_Session == nil) {
+        _Session = [MIDINetworkSession defaultSession];
+        _Session.enabled = true;
+        _Session.connectionPolicy = MIDINetworkConnectionPolicy_NoOne;
+    }
     
     // configure service browser
     if (self.services == nil) {
         self.services = [[NSMutableArray alloc] init];
     }
+    
     if (self.serviceBrowser == nil) {
         self.serviceBrowser = [[NSNetServiceBrowser alloc] init];
         [self.serviceBrowser setDelegate:self];
@@ -148,17 +149,17 @@
         [_deviceArray addObject:Service.name];
     }
     [_deviceArray addObject:@"..."];
-    _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
-    _masterCount = _deviceArray.count;
 }
 
 - (IBAction)masterDown:(id)sender {
-    if (_masterIdx +1 < _masterCount) {
-        _masterIdx++;
-        _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
-    } else {
-        _masterIdx = 0;
-        _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
+    if (_deviceArray.count > 0) {
+        if (_masterIdx + 1 <_deviceArray.count) {
+            _masterIdx++;
+            _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
+        } else {
+            _masterIdx = 0;
+            _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
+        }
     }
 }
 

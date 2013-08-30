@@ -19,7 +19,6 @@
 		902E407B17C200D20038DEDD /* WIJAM.png in Resources */ = {isa = PBXBuildFile; fileRef = 902E407A17C200D20038DEDD /* WIJAM.png */; };
 		9035444717BF7D4000881C6B /* Drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9035444617BF7D4000881C6B /* Drawing.m */; };
 		903770E917C0C91200F42DFA /* Simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 903770E817C0C91200F42DFA /* Simple.png */; };
-		903770EB17C0CA8500F42DFA /* Draw2Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 903770EA17C0CA8500F42DFA /* Draw2Play.png */; };
 		9056430517CB43C800248E72 /* Communicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 905642FE17CB43C800248E72 /* Communicator.m */; };
 		9056430617CB43C800248E72 /* MIDINote.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056430017CB43C800248E72 /* MIDINote.m */; };
 		9056430717CB43C800248E72 /* NoteNumDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056430217CB43C800248E72 /* NoteNumDict.m */; };
@@ -64,7 +63,6 @@
 		9035444517BF7D4000881C6B /* Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawing.h; sourceTree = "<group>"; };
 		9035444617BF7D4000881C6B /* Drawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Drawing.m; sourceTree = "<group>"; };
 		903770E817C0C91200F42DFA /* Simple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Simple.png; sourceTree = "<group>"; };
-		903770EA17C0CA8500F42DFA /* Draw2Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Draw2Play.png; sourceTree = "<group>"; };
 		905642FD17CB43C800248E72 /* Communicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Communicator.h; sourceTree = "<group>"; };
 		905642FE17CB43C800248E72 /* Communicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Communicator.m; sourceTree = "<group>"; };
 		905642FF17CB43C800248E72 /* MIDINote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDINote.h; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 				901E8CF817C5FD56006E1913 /* Triangle.png */,
 				901E8CF617C5FD4D006E1913 /* ScaleButton.png */,
 				902E407A17C200D20038DEDD /* WIJAM.png */,
-				903770EA17C0CA8500F42DFA /* Draw2Play.png */,
 				903770E817C0C91200F42DFA /* Simple.png */,
 				905E2D4417C088250020AAFB /* Advanced.png */,
 				907D9FAE17BDC77300147DBC /* test@2x.png */,
@@ -274,7 +271,6 @@
 				907D9FAF17BDC77300147DBC /* test@2x.png in Resources */,
 				905E2D4517C088250020AAFB /* Advanced.png in Resources */,
 				903770E917C0C91200F42DFA /* Simple.png in Resources */,
-				903770EB17C0CA8500F42DFA /* Draw2Play.png in Resources */,
 				902E407B17C200D20038DEDD /* WIJAM.png in Resources */,
 				901E8CF717C5FD4D006E1913 /* ScaleButton.png in Resources */,
 				901E8CF917C5FD56006E1913 /* Triangle.png in Resources */,
@@ -352,7 +348,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -376,7 +372,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -389,7 +385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerMachine/PlayerMachine-Prefix.pch";
 				INFOPLIST_FILE = "PlayerMachine/PlayerMachine-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -401,7 +397,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerMachine/PlayerMachine-Prefix.pch";
 				INFOPLIST_FILE = "PlayerMachine/PlayerMachine-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

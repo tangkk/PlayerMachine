@@ -288,6 +288,7 @@ static void Slide (CGRect Rect, CGPoint currentPoint, UIButton *Button) {
         // Set everytime in case it will miss channel change.
         [M setNote:MIDINoteNumberArray[tag]];
         [M setChannel:*(_playerChannel)];
+        [M setID:*(_playerID)];
         [M setVelocity:velocity];
         
         [_CMU sendMidiData:M];
