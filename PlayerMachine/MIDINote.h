@@ -1,6 +1,6 @@
 //
-//  MIDIMessage.h
-//  Tuner
+//  MIDINote.h
+//  PlayerMachine
 //
 //  Created by tangkk on 12/3/13.
 //  Copyright (c) 2013 tangkk. All rights reserved.
@@ -13,7 +13,7 @@
 
 #import <Foundation/Foundation.h>
 
-// Define the mapping of musical root and number, with double letter means "#"
+/* Define the mapping of musical root and number, with double letter means "#" */
 #define Root_C 0
 #define Root_CC 1
 #define Root_D 2
@@ -27,7 +27,7 @@
 #define Root_AA 10
 #define Root_B 11
 
-// Instrument names
+/* Instrument names */
 #define Loop 0
 #define Trombone 1
 #define SteelGuitar 2
@@ -36,7 +36,7 @@
 #define Piano 5
 #define Vibraphone 6
 
-// MIDI Messages' status number
+/* MIDI Messages' status number */
 enum {
     kMIDINoteOn = 0x90,
     kMIDINoteOff = 0x80,
@@ -45,7 +45,7 @@ enum {
     kMIDINoteEdu = 0x7D
 };
 
-// MIDI Messages' channel number
+/* MIDI Messages' channel number */
 enum {
     kChannel_0 = 0x0,
     kChannel_1 = 0x1,

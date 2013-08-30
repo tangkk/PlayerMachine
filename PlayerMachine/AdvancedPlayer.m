@@ -17,8 +17,10 @@
 #import "MIDINote.h"
 
 @interface AdvancedPlayer ()  {
+    
     BOOL longPressed;
     
+    /****** Drawing Elements ******/
     UInt16 Brush;
     CGFloat Red;
     CGFloat Green;
@@ -31,30 +33,34 @@
     CGFloat gridHeight;
     UInt16 GridIdx;
     
+    /****** MIDINotes ******/
     UIButton *keys[36];
+    UInt8 MIDINoteNumberArray[36];
     
-    // Dynamics
+    /******Dynamics ******/
     CGRect SliderRect;
     UInt8 velocity;
     float velocityMin;
     float velocityMax;
     UInt8 currentPage;
-    UInt8 MIDINoteNumberArray[36];
 }
 
-// ViewController elements
+/******ViewController elements ******/
+/* SimpleButton: to return to simple mode */
 @property (strong, nonatomic) IBOutlet UIButton *SimpleButton;
+/* Button1 - 3 is for flipping between different octaves(pages in the view) */
 @property (strong, nonatomic) IBOutlet UIButton *Button1;
 @property (strong, nonatomic) IBOutlet UIButton *Button2;
 @property (strong, nonatomic) IBOutlet UIButton *Button3;
+/* The ButtonV is for change velocity */
 @property (strong, nonatomic) IBOutlet UIButton *ButtonV;
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
 @property (strong, nonatomic) IBOutlet UIImageView *SideImage;
 @property (strong, nonatomic) IBOutlet UILabel *feedbackLabel;
-
+/* a Timer used for drawing the grid */
 @property (nonatomic, retain) NSTimer *draw;
 
-// Communication Infrastructure
+/*****Communication Infrastructure *****/
 @property (readonly) NoteNumDict *Dict;
 @property (readwrite) NSMutableArray *MIDINoteNameArray;
 @property (readwrite) NSMutableArray *MIDINoteArray;
@@ -63,15 +69,13 @@
 
 @implementation AdvancedPlayer
 
-@synthesize draw;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:NO];
     _SimpleButton.alpha = 0;
     _Button1.alpha = 0;
     _Button2.alpha = 0;
@@ -85,19 +89,19 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:NO];
+    [UIView animateWithDuration:2 animations:^{_Button1.alpha = 1, _Button2.alpha = 1; _Button3.alpha = 1; _ButtonV.alpha = 1;}];
     [self viewInit];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Setup Routine
 
 - (void) viewInit {
-    // Variables initialize
     longPressed = false;
     Brush = 3;
     Red = 1;
@@ -110,10 +114,9 @@
     gridHeight = height / GridSize;
     GridIdx = 0;
     
-    [UIView animateWithDuration:2 animations:^{_Button1.alpha = 1, _Button2.alpha = 1; _Button3.alpha = 1; _ButtonV.alpha = 1;}];
-    [self placeButtons];
     // Draw a grid
-    draw = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(drawGrid) userInfo:nil repeats:YES];
+     [self placeButtons];
+    _draw = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(drawGrid) userInfo:nil repeats:YES];
     
     velocityMin = _Button3.frame.origin.y + _Button3.frame.size.height + 25;
     velocityMax = _SideImage.frame.size.height - 25;
@@ -171,6 +174,7 @@ static void Slide (CGRect Rect, CGPoint currentPoint, UIButton *Button) {
 }
 
 #pragma mark - Side Button
+/****** Changing Octaves ******/
 - (IBAction)page:(id)sender {
     UIButton *Button = (UIButton *)sender;
     UInt8 page = Button.tag;
@@ -215,7 +219,6 @@ static void Slide (CGRect Rect, CGPoint currentPoint, UIButton *Button) {
     [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{_feedbackLabel.alpha = 0;} completion:NO];
 }
 
-
 #pragma mark - Drawing
 
 - (void) drawGrid {
@@ -228,7 +231,7 @@ static void Slide (CGRect Rect, CGPoint currentPoint, UIButton *Button) {
     [Drawing drawLineWithPreviousPoint:CGPointMake(gridWidth*GridIdx, 0) CurrentPoint:CGPointMake(gridWidth*GridIdx, height) onImage:self.mainImage withbrush:Brush Red:Red Green:Green Blue:Blue Alpha:Opacity Size:self.mainImage.frame.size];
     [Drawing drawLineWithPreviousPoint:CGPointMake(0, gridHeight*GridIdx) CurrentPoint:CGPointMake(width, gridHeight*GridIdx) onImage:self.mainImage withbrush:Brush Red:Red Green:Green Blue:Blue Alpha:Opacity Size:self.mainImage.frame.size];
     if(GridIdx++ == 6) {
-        [draw invalidate];
+        [_draw invalidate];
         GridIdx = 0;
     }
 }
@@ -282,6 +285,7 @@ static void Slide (CGRect Rect, CGPoint currentPoint, UIButton *Button) {
     }
 }
 
+/****** The function for actually sending out performance ******/
 - (void)playAtTag:(NSInteger)tag {
     if (*_playerEnabled) {
         MIDINote *M = [_MIDINoteArray objectAtIndex:tag];
@@ -304,6 +308,7 @@ static void Slide (CGRect Rect, CGPoint currentPoint, UIButton *Button) {
 
 #pragma mark - Gesture Recognizer
 
+/****** Showing the simple button ******/
 - (IBAction)LongPressed:(id)sender {
     DSLog(@"LongPressed");
     longPressed = true;

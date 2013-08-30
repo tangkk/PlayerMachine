@@ -39,7 +39,6 @@
 		9094414117BB286800F3A0FD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9094414017BB286800F3A0FD /* Default-568h@2x.png */; };
 		9094414417BB286800F3A0FD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9094414217BB286800F3A0FD /* MainStoryboard.storyboard */; };
 		9094414717BB286800F3A0FD /* PlayerMachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094414617BB286800F3A0FD /* PlayerMachineViewController.m */; };
-		90997FBC17CDDC71001CE5C6 /* QUIT.png in Resources */ = {isa = PBXBuildFile; fileRef = 90997FBB17CDDC71001CE5C6 /* QUIT.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,7 +91,6 @@
 		9094414317BB286800F3A0FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		9094414517BB286800F3A0FD /* PlayerMachineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerMachineViewController.h; sourceTree = "<group>"; };
 		9094414617BB286800F3A0FD /* PlayerMachineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerMachineViewController.m; sourceTree = "<group>"; };
-		90997FBB17CDDC71001CE5C6 /* QUIT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QUIT.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +188,6 @@
 		9094413117BB286800F3A0FD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				90997FBB17CDDC71001CE5C6 /* QUIT.png */,
 				901E8CFD17C60F59006E1913 /* Triangle_180.png */,
 				901E8CF817C5FD56006E1913 /* Triangle.png */,
 				901E8CF617C5FD4D006E1913 /* ScaleButton.png */,
@@ -275,7 +272,6 @@
 				901E8CF717C5FD4D006E1913 /* ScaleButton.png in Resources */,
 				901E8CF917C5FD56006E1913 /* Triangle.png in Resources */,
 				901E8CFE17C60F59006E1913 /* Triangle_180.png in Resources */,
-				90997FBC17CDDC71001CE5C6 /* QUIT.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +344,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -372,7 +368,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -385,7 +381,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerMachine/PlayerMachine-Prefix.pch";
 				INFOPLIST_FILE = "PlayerMachine/PlayerMachine-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -397,7 +393,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerMachine/PlayerMachine-Prefix.pch";
 				INFOPLIST_FILE = "PlayerMachine/PlayerMachine-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

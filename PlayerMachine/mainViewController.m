@@ -24,18 +24,19 @@
 @property (strong, nonatomic) IBOutlet UILabel *WI;
 @property (strong, nonatomic) IBOutlet UIButton *JAM;
 
-// Network Service related declaraion
+/****** Network Service related declaraion ******/
 @property (strong, nonatomic) NSMutableArray *services;
 @property (strong, nonatomic) NSNetServiceBrowser *serviceBrowser;
 @property (strong, nonatomic) MIDINetworkSession *Session;
+/* Timer for periodically scanning connected devices */
 @property (nonatomic, retain) NSTimer *connectTimer;
 
-// UI Objects
+/****** UI Objects ******/
 @property (strong, nonatomic) IBOutlet UILabel *masterName;
 @property (strong, nonatomic) NSMutableArray *deviceArray;
 @property (strong, nonatomic) IBOutlet UIButton *Down;
 
-// master selection declaration
+/* master selection*/
 @property (assign, atomic) UInt16 masterIdx;
 
 
@@ -44,17 +45,18 @@
 @implementation mainViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:NO];
     self.WI.alpha = 0; self.JAM.alpha = 0; self.masterName.alpha = 0;  self.Down.alpha = 0;
     [UIView animateWithDuration:2 animations:
      ^{self.WI.alpha = 1; self.JAM.alpha = 1; self.masterName.alpha = 1;  self.Down.alpha = 1;}];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:NO];
     _masterIdx = 0;
     _deviceArray = [NSMutableArray arrayWithObjects:@"...", nil];
     _masterName.text = [_deviceArray objectAtIndex:_masterIdx];
     [self removeAllConnections];
-    
     [self configureNetworkSessionAndServiceBrowser];
     _connectTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(scanServices) userInfo:nil repeats:YES];
     detectConnectedCounter = 0;
@@ -75,7 +77,7 @@
 }
 
 #pragma mark - network Service
-
+/****** Thanks for CX's participation in this part ******/
 - (void) configureNetworkSessionAndServiceBrowser {
     // configure network session
     if (_Session == nil) {
@@ -151,6 +153,7 @@
     [_deviceArray addObject:@"..."];
 }
 
+/****** Choosing Master ******/
 - (IBAction)masterDown:(id)sender {
     if (_deviceArray.count > 0) {
         if (_masterIdx + 1 <_deviceArray.count) {

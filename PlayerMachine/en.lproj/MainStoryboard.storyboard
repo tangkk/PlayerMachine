@@ -396,7 +396,6 @@
         <class className="mainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/mainViewController.h"/>
             <relationships>
-                <relationship kind="action" name="JAM:"/>
                 <relationship kind="action" name="masterDown:"/>
                 <relationship kind="outlet" name="Down" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="JAM" candidateClass="UIButton"/>

@@ -18,36 +18,37 @@
 #import "NoteNumDict.h"
 #import "Communicator.h"
 
-// for getting ip address
+#import "AdvancedPlayer.h"
+
+/****** for getting ip address ******/
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 
-#import "AdvancedPlayer.h"
-
 @interface PlayerMachineViewController () {
-    // Animation
+    /* Animation*/
     CGFloat mouseXReg[AnimateArrayLength];
     CGFloat mouseYReg[AnimateArrayLength];
     UInt16 tick[AnimateArrayLength];
     BOOL animate[AnimateArrayLength];
     
-    // notePosition
+    /* notePosition */
     UInt16 notePos;
     UInt16 notePosReg[AnimateArrayLength];
     UInt8 velPos;
     
-    // the size parameter of the screen
+    /* the size parameter of the screen */
     CGFloat width;
     CGFloat height;
     
-    // UIBezierPath
+    /* UIBezierPath */
     UIBezierPath *path;
     CGPoint PPoint;
     
-    // Trace Stationary Point
+    /* Trace Stationary Point */
     CGFloat yReg[RegLength];
     BOOL RegValid;
     
+    /* drawing elements */
     CGPoint lastPoint;
     CGFloat red;
     CGFloat green;
@@ -57,9 +58,9 @@
     UInt16 length;
     BOOL mouseSwiped;
     
+    /* other */
     BOOL longPressed;
     BOOL animateEnabled;
-    
     UInt16 checkConnectedCounter;
 }
 
@@ -67,14 +68,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *textLocation;
 @property (strong, nonatomic) IBOutlet UIButton *IMAdvanced;
 @property (strong, nonatomic) IBOutlet UIButton *QUIT;
-
 @property (nonatomic, retain) NSTimer *draw;
 
-// The objects used during segue
+/* The objects used during segue */
 @property (nonatomic, retain) NSTimer *makeSureConnected;
 @property (strong, nonatomic) IBOutlet UILabel *feedbackLabel;
 
-// Communication infrastructures
+/* Communication infrastructures */
 @property (strong, nonatomic) Communicator *CMU;
 @property (readonly) NoteNumDict *Dict;
 @property (copy) NSString *ownIP;
@@ -83,11 +83,11 @@
 @property (strong, nonatomic) NSMutableArray *MIDINoteArray;
 @property (assign) BOOL playerEnabled;
 
-// Scoring and feedback
+/* Scoring and feedback */
 - (void) scoringMeAndTeam:(NSNumber *)mixScore;
 - (void) cueFeedback:(NSNumber *)cue;
 
-// Segue for advance player
+/* Segue for advance player */
 @property (strong, nonatomic) AdvancedPlayer *Adp;
 
 @end
@@ -103,10 +103,12 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:NO];
     self.feedbackLabel.alpha = 0;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:NO];
     // Initialize objects during segue
     _makeSureConnected = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkIfConnected) userInfo:nil repeats:YES];
     checkConnectedCounter = 0;
@@ -129,7 +131,7 @@
     notePos = 0;
     width = self.view.frame.size.width;
     height = self.view.frame.size.height;
-    _draw = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(processingDraw) userInfo:nil repeats:YES];
+    _draw = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(processingDraw) userInfo:nil repeats:YES];
     [self.mainImage setAlpha:opacity];
     
     [self clearAnimationArrays];
@@ -173,7 +175,7 @@
     
 }
 
-#pragma mark - Assignment Handler (delegate)
+#pragma mark - Assignment Handler (delegate of Communicator)
 - (void)MIDIAssignment:(const MIDIPacket *)packet {
     NSLog(@"AssignmentDelegate Called");
     // handle sysEx messages which is an assignment from the master to players
@@ -213,7 +215,7 @@
         int ad2 = [Arr[1] intValue];
         int ad3 = [Arr[2] intValue];
         int ad4 = [Arr[3] intValue];
-        // Check if the IP address match, if true, get the channel number inside the packet.
+        // Check if the IP address match, if true, get the channel number inside the packet
         if (add1 == (UInt8)ad1 && add2 == (UInt8)ad2 && add3 == (UInt8)ad3 && add4 == (UInt8)ad4) {
             UInt8 Root = packet->data[10];
             if (Root < 10) {
@@ -230,7 +232,6 @@
                 NSLog(@"deal with cue feedback");
                 NSNumber *cue = [NSNumber numberWithUnsignedChar:(Root - 50)];
                 [self performSelectorInBackground:@selector(cueFeedback:) withObject:cue];
-                
             } else {
                 NSLog(@"deal with score feedback");
                 UInt8 myScore = Root;
@@ -278,19 +279,21 @@
 
 #pragma mark - Make Sure Process After Segue
 - (void)checkIfConnected {
+    // Should wait for some time because there are fake temperary connections
     if (checkConnectedCounter++ > 2) {
         checkConnectedCounter = 0;
-        //[_makeSureConnected invalidate];
         if (*_masterConnected && !_playerEnabled) {
             animateEnabled = true;
             [UIView animateWithDuration:1 animations:^{self.feedbackLabel.alpha = 1;}];
-            [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
+            [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp
+                             animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
             _feedbackLabel.text = @"waiting for Master...";
         } else if (_playerEnabled) {
             if (animateEnabled) {
                 _feedbackLabel.text = @"tap or draw to Jam...";
                 [UIView animateWithDuration:1 animations:^{self.feedbackLabel.alpha = 1;}];
-                [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
+                [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionTransitionCurlUp
+                                 animations:^{self.feedbackLabel.alpha = 0;} completion:NO];
             }
             animateEnabled = false;
         } else {
@@ -310,8 +313,11 @@
     UInt8 overallScore = (mix & 0xFF00) >> 8;
     NSLog(@"myScore = %d", myScore);
     NSLog(@"overallScore = %d", overallScore);
+    
     NSString *Score = [NSString stringWithFormat:@"Me/Team: %d/%d", myScore, overallScore];
     [self feebackAnimatewithString: Score];
+    
+    // Send the score to the advanced player too
     if (_Adp) {
         [_Adp feebackAnimatewithString:Score];
     }
@@ -350,6 +356,8 @@
             break;
     }
     [self feebackAnimatewithString:CueString];
+    
+    // Send to cue to the advanced player too
     if (_Adp) {
         [_Adp feebackAnimatewithString:CueString];
     }
@@ -447,9 +455,8 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
 }
 
 #pragma mark - Timer Triggered Function
-
+/***** This process is called once per 0.03 second to simulate the "processing"'s style http://www.processing.org of drawing ability ******/
 - (void)processingDraw {
-    //Do the waterwave animation
     [self doAnimation];
 }
 
@@ -569,7 +576,7 @@ static CGPoint midPoint(CGPoint p0, CGPoint p1) {
 }
 
 #pragma mark - Segue
-
+/****** pass any essential variables to advanced player ******/
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     _Adp = (AdvancedPlayer *)segue.destinationViewController;
     _Adp.CMU = _CMU;

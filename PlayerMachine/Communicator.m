@@ -1,6 +1,6 @@
 //
 //  Communicator.m
-//  Tuner
+//  PlayerMachine
 //
 //  Created by tangkk on 10/4/13.
 //  Copyright (c) 2013 tangkk. All rights reserved.
@@ -11,7 +11,6 @@
 #import "MIDINote.h"
 #import "NoteNumDict.h"
 
-// Import the PGMidi functionality
 #import "PGMidi/PGMidi.h"
 #import "PGMidi/PGArc.h"
 #import "PGMidi/iOSVersionDetection.h"
@@ -93,7 +92,7 @@ NSString *StringFromPacket(const MIDIPacket *packet)
             ];
 }
 
-// These four methods are required by PGMidiDelegate
+/****** These four methods are required by PGMidiDelegate ******/
 - (void) midi:(PGMidi*)midi sourceAdded:(PGMidiSource *)source
 {
     [source addDelegate:self];
@@ -111,6 +110,7 @@ NSString *StringFromPacket(const MIDIPacket *packet)
 {
 }
 
+/****** midiReceived delegate ******/
 - (void) handlemidiReceived:(const MIDIPacket *)packet {
     NSLog(@"handlemidiReceived:");
     [[self AssignmentDelegate] MIDIAssignment:packet];
@@ -132,6 +132,7 @@ NSString *StringFromPacket(const MIDIPacket *packet)
     }
 }
 
+/****** send notes and ID at the same time ******/
 - (void) sendMidiDataInBackground:(id)midinote {
     MIDINote *midiNote = midinote;
     NSLog(@"Slave Send Normal Note");
