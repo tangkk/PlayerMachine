@@ -23,6 +23,7 @@
 }
 @property (strong, nonatomic) IBOutlet UILabel *WI;
 @property (strong, nonatomic) IBOutlet UIButton *JAM;
+@property (strong, nonatomic) IBOutlet UIButton *Refresh;
 
 /****** Network Service related declaraion ******/
 @property (strong, nonatomic) NSMutableArray *services;
@@ -46,12 +47,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:NO];
-    self.WI.alpha = 0; self.JAM.alpha = 0; self.masterName.alpha = 0;  self.Down.alpha = 0;
+    self.WI.alpha = 0; self.JAM.alpha = 0; self.masterName.alpha = 0;  self.Down.alpha = 0; self.Refresh.alpha = 0;
     [UIView animateWithDuration:2 animations:
-     ^{self.WI.alpha = 1; self.JAM.alpha = 1; self.masterName.alpha = 1;  self.Down.alpha = 1;}];
+     ^{self.WI.alpha = 1; self.JAM.alpha = 1; self.masterName.alpha = 1;  self.Down.alpha = 1; self.Refresh.alpha = 1;}];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"ViewDidAppear");
     [super viewDidAppear:NO];
     _masterIdx = 0;
     _deviceArray = [NSMutableArray arrayWithObjects:@"...", nil];
@@ -124,6 +126,16 @@
             [_Session removeConnection:Con];
         }
     }
+}
+
+- (IBAction)Refresh:(id)sender {
+    [self removeAllConnections];
+    [self.services removeAllObjects];
+    _serviceBrowser = nil;
+    _Session = nil;
+
+    [self configureNetworkSessionAndServiceBrowser];
+ 
 }
 
 #pragma mark - master selection

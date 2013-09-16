@@ -14,7 +14,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKa-Ce-d6d">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="aF6-Tv-95U"/>
+                                    <constraint firstAttribute="width" constant="200" id="tNP-P3-Ap3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="WIJAM.png">
@@ -31,8 +31,8 @@
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="WI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4e-wq-kr3">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="4ma-rm-Wrl"/>
-                                    <constraint firstAttribute="width" constant="230" id="lAK-s4-wAS"/>
+                                    <constraint firstAttribute="width" constant="230" id="Iw3-d7-CWT"/>
+                                    <constraint firstAttribute="height" constant="58" id="mzo-mE-aUn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="65"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -40,7 +40,7 @@
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXk-hL-gwt">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="tgU-28-pSl"/>
+                                    <constraint firstAttribute="height" constant="26" id="8d4-DG-XY7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="23"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -49,8 +49,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZt-f4-bnC">
                                 <accessibility key="accessibilityConfiguration" label="Loop"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="34v-kg-skP"/>
-                                    <constraint firstAttribute="height" constant="40" id="IQ0-za-FYz"/>
+                                    <constraint firstAttribute="width" constant="40" id="f5I-qW-1Bq"/>
+                                    <constraint firstAttribute="height" constant="40" id="ggW-OF-hcP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                 <state key="normal" backgroundImage="Triangle.png">
@@ -64,23 +64,43 @@
                                     <action selector="masterDown:" destination="uvJ-Vr-RlW" eventType="touchUpInside" id="em5-2X-e5N"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EiE-mx-G5R">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="H1d-RO-4q4"/>
+                                    <constraint firstAttribute="width" constant="60" id="sDt-UW-IQ7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Trebuchet-BoldItalic" family="Trebuchet MS" pointSize="15"/>
+                                <state key="normal" title="Refresh" backgroundImage="ScaleButton.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="Refresh:" destination="uvJ-Vr-RlW" eventType="touchUpInside" id="Bnu-e5-lLO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="N4e-wq-kr3" firstAttribute="trailing" secondItem="QXk-hL-gwt" secondAttribute="trailing" type="default" id="AsR-lq-pbb"/>
-                            <constraint firstItem="QXk-hL-gwt" firstAttribute="top" secondItem="xZt-f4-bnC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="BhN-PM-g6z"/>
-                            <constraint firstItem="QXk-hL-gwt" firstAttribute="leading" secondItem="N4e-wq-kr3" secondAttribute="leading" type="default" id="MLg-ey-rM2"/>
-                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerX" secondItem="xZt-f4-bnC" secondAttribute="centerX" type="default" id="NNw-Ph-1MT"/>
-                            <constraint firstItem="xZt-f4-bnC" firstAttribute="centerX" secondItem="eZm-Os-gX3" secondAttribute="centerX" type="default" id="U8g-Vi-NBy"/>
-                            <constraint firstItem="QXk-hL-gwt" firstAttribute="centerX" secondItem="xZt-f4-bnC" secondAttribute="centerX" type="default" id="bgk-s5-84O"/>
-                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="top" secondItem="N4e-wq-kr3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="lNK-f5-eAH"/>
-                            <constraint firstItem="xZt-f4-bnC" firstAttribute="top" secondItem="vKa-Ce-d6d" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="pfH-qB-FpT"/>
-                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerY" secondItem="eZm-Os-gX3" secondAttribute="centerY" type="default" id="sIP-Mp-XkC"/>
+                            <constraint firstItem="QXk-hL-gwt" firstAttribute="top" secondItem="xZt-f4-bnC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="6yd-UY-vT2"/>
+                            <constraint firstItem="N4e-wq-kr3" firstAttribute="leading" secondItem="QXk-hL-gwt" secondAttribute="leading" type="default" id="Jhk-3p-JbB"/>
+                            <constraint firstItem="QXk-hL-gwt" firstAttribute="trailing" secondItem="N4e-wq-kr3" secondAttribute="trailing" type="default" id="RJf-ar-InM"/>
+                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerX" secondItem="xZt-f4-bnC" secondAttribute="centerX" type="default" id="T8L-06-mgU"/>
+                            <constraint firstItem="xZt-f4-bnC" firstAttribute="top" secondItem="vKa-Ce-d6d" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Trs-VC-Q0h"/>
+                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerX" secondItem="eZm-Os-gX3" secondAttribute="centerX" type="default" id="aum-57-yZa"/>
+                            <constraint firstItem="xZt-f4-bnC" firstAttribute="centerX" secondItem="QXk-hL-gwt" secondAttribute="centerX" type="default" id="eTK-so-bTN"/>
+                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="top" secondItem="N4e-wq-kr3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="gbP-2V-HO5"/>
+                            <constraint firstItem="EiE-mx-G5R" firstAttribute="top" secondItem="eZm-Os-gX3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="i46-5o-4d8"/>
+                            <constraint firstItem="vKa-Ce-d6d" firstAttribute="centerY" secondItem="eZm-Os-gX3" secondAttribute="centerY" type="default" id="qRF-l7-bZq"/>
+                            <constraint firstItem="EiE-mx-G5R" firstAttribute="leading" secondItem="eZm-Os-gX3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="v8W-R3-kIZ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="Down" destination="xZt-f4-bnC" id="KjG-vH-p8O"/>
                         <outlet property="JAM" destination="vKa-Ce-d6d" id="2oW-HZ-hHr"/>
+                        <outlet property="Refresh" destination="EiE-mx-G5R" id="h1i-xi-ilr"/>
                         <outlet property="WI" destination="N4e-wq-kr3" id="xgz-4W-ykk"/>
                         <outlet property="masterName" destination="QXk-hL-gwt" id="vXs-Bi-CAm"/>
                     </connections>
@@ -99,8 +119,8 @@
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r53-PE-td6">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="c37-mw-7nc"/>
-                                    <constraint firstAttribute="width" constant="88" id="hFn-zb-e8n"/>
+                                    <constraint firstAttribute="width" constant="88" id="8Ma-k1-Q5U"/>
+                                    <constraint firstAttribute="height" constant="33" id="fYY-1V-V3Y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -111,8 +131,8 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFW-A4-Zgu">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="hzL-cy-SIc"/>
-                                    <constraint firstAttribute="width" constant="60" id="rtb-qu-ZVQ"/>
+                                    <constraint firstAttribute="width" constant="60" id="k8f-9y-5D8"/>
+                                    <constraint firstAttribute="height" constant="30" id="vKf-Vz-9IE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Trebuchet-BoldItalic" family="Trebuchet MS" pointSize="15"/>
                                 <state key="normal" title="QUIT" backgroundImage="ScaleButton.png">
@@ -128,8 +148,8 @@
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Master Connected!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s63-Kf-cHW">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="239" id="PIJ-kq-Hgf"/>
-                                    <constraint firstAttribute="height" constant="21" id="RsH-Hw-xoU"/>
+                                    <constraint firstAttribute="width" constant="239" id="2aY-kC-9bS"/>
+                                    <constraint firstAttribute="height" constant="21" id="qmF-b5-Vk0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="23"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -137,8 +157,8 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-8y-1jM">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="DrJ-oB-Oob"/>
-                                    <constraint firstAttribute="width" constant="100" id="ORO-Pv-glf"/>
+                                    <constraint firstAttribute="width" constant="100" id="fZu-0K-VDX"/>
+                                    <constraint firstAttribute="height" constant="100" id="rPS-Gz-2vA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="Advanced.png">
@@ -157,18 +177,18 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="vj9-m0-T1X" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="4xI-bt-W0q"/>
-                            <constraint firstItem="gMg-8y-1jM" firstAttribute="centerY" secondItem="vj9-m0-T1X" secondAttribute="centerY" type="default" id="GYH-FP-nLs"/>
-                            <constraint firstItem="TFW-A4-Zgu" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="HLo-04-TUM"/>
-                            <constraint firstItem="s63-Kf-cHW" firstAttribute="top" secondItem="r53-PE-td6" secondAttribute="top" type="default" id="RO0-GX-6oq"/>
-                            <constraint firstItem="r53-PE-td6" firstAttribute="top" secondItem="3" secondAttribute="top" constant="112" id="Rv3-tv-8xt"/>
-                            <constraint firstItem="vj9-m0-T1X" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="Ss0-Zg-7Ib"/>
-                            <constraint firstItem="vj9-m0-T1X" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="V1t-AE-oWs"/>
-                            <constraint firstItem="TFW-A4-Zgu" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="cV4-ON-la0"/>
-                            <constraint firstItem="s63-Kf-cHW" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="40" id="jKo-CH-fF7"/>
-                            <constraint firstItem="vj9-m0-T1X" firstAttribute="centerX" secondItem="gMg-8y-1jM" secondAttribute="centerX" type="default" id="jcK-aV-t4j"/>
-                            <constraint firstItem="vj9-m0-T1X" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="p1E-Ck-g15"/>
-                            <constraint firstItem="r53-PE-td6" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="90" id="zue-cY-cpZ"/>
+                            <constraint firstItem="vj9-m0-T1X" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="9ba-qA-vBS"/>
+                            <constraint firstItem="TFW-A4-Zgu" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Fw8-zX-LAe"/>
+                            <constraint firstItem="vj9-m0-T1X" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="L8H-hB-4ga"/>
+                            <constraint firstItem="vj9-m0-T1X" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="McZ-Te-8zv"/>
+                            <constraint firstItem="r53-PE-td6" firstAttribute="top" secondItem="3" secondAttribute="top" constant="112" id="XMv-Hu-wJ8"/>
+                            <constraint firstItem="s63-Kf-cHW" firstAttribute="top" secondItem="r53-PE-td6" secondAttribute="top" type="default" id="fl6-UK-zKv"/>
+                            <constraint firstItem="gMg-8y-1jM" firstAttribute="centerY" secondItem="vj9-m0-T1X" secondAttribute="centerY" type="default" id="gQ8-Gq-gZ5"/>
+                            <constraint firstItem="s63-Kf-cHW" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="40" id="kX6-vu-YAx"/>
+                            <constraint firstItem="TFW-A4-Zgu" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="kys-h0-1ct"/>
+                            <constraint firstItem="vj9-m0-T1X" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="ljH-TQ-j7I"/>
+                            <constraint firstItem="gMg-8y-1jM" firstAttribute="centerX" secondItem="vj9-m0-T1X" secondAttribute="centerX" type="default" id="nH1-OG-NLF"/>
+                            <constraint firstItem="r53-PE-td6" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="90" id="t4g-Ui-grX"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="IBS-X7-oDj" appends="YES" id="ugw-MR-0fp"/>
@@ -201,12 +221,12 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d6B-aT-6ao">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="291" id="he3-9Q-CrP"/>
+                                    <constraint firstAttribute="width" constant="291" id="bE2-hh-Gon"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmg-cA-U0H">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Uje-Uz-k4z"/>
+                                    <constraint firstAttribute="width" constant="100" id="zQ1-Rt-otp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="Simple.png">
@@ -222,7 +242,7 @@
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ByJ-O3-xwj">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="xO9-mZ-so4"/>
+                                    <constraint firstAttribute="height" constant="50" id="STy-Q4-yWi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="25"/>
                                 <state key="normal" title="V" backgroundImage="ScaleButton.png">
@@ -235,8 +255,8 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oiy-LO-LTD">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="UdR-Qz-pJ7"/>
-                                    <constraint firstAttribute="width" constant="30" id="pPx-c0-uLK"/>
+                                    <constraint firstAttribute="width" constant="30" id="9RX-3m-47G"/>
+                                    <constraint firstAttribute="height" constant="50" id="d3b-pT-12t"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="25"/>
                                 <state key="normal" title="1" backgroundImage="ScaleButton.png">
@@ -252,7 +272,7 @@
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pl0-Wc-VIz">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="a0I-rV-ZlQ"/>
+                                    <constraint firstAttribute="height" constant="50" id="hiz-3w-D7g"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="25"/>
                                 <state key="normal" title="2" backgroundImage="ScaleButton.png">
@@ -268,7 +288,7 @@
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FTP-EJ-df6">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="tWW-qT-S2b"/>
+                                    <constraint firstAttribute="height" constant="50" id="hgs-59-CVV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="25"/>
                                 <state key="normal" title="3" backgroundImage="ScaleButton.png">
@@ -284,15 +304,15 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Q4-fX-tE9">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="eNV-sr-vj0"/>
-                                    <constraint firstAttribute="height" constant="128" id="kXm-ja-sVq"/>
+                                    <constraint firstAttribute="width" constant="30" id="JT9-kY-gqE"/>
+                                    <constraint firstAttribute="height" constant="128" id="xNu-L9-Z2f"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hm4-Wm-Slq"/>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Feedback Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTW-2a-duV">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="EK1-Ll-Skn"/>
-                                    <constraint firstAttribute="width" constant="239" id="ahO-ro-Ze0"/>
+                                    <constraint firstAttribute="width" constant="239" id="JQ9-UA-bsg"/>
+                                    <constraint firstAttribute="height" constant="21" id="Upz-32-jfo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="23"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -302,30 +322,30 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="nmg-cA-U0H" firstAttribute="centerY" secondItem="hm4-Wm-Slq" secondAttribute="centerY" type="default" id="136-Hr-MMj"/>
-                            <constraint firstItem="hm4-Wm-Slq" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="16t-3o-FU2"/>
-                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="trailing" secondItem="oiy-LO-LTD" secondAttribute="trailing" type="default" id="2vv-iR-hRV"/>
-                            <constraint firstItem="ByJ-O3-xwj" firstAttribute="trailing" secondItem="FTP-EJ-df6" secondAttribute="trailing" type="default" id="4Mt-iS-XAz"/>
-                            <constraint firstAttribute="trailing" secondItem="WTW-2a-duV" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="By3-bl-qXJ"/>
-                            <constraint firstItem="8Q4-fX-tE9" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" constant="-64" id="D1Y-aV-wcX"/>
-                            <constraint firstItem="hm4-Wm-Slq" firstAttribute="bottom" secondItem="Jzy-2O-mHK" secondAttribute="bottom" type="default" id="FIJ-mp-uiC"/>
-                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="trailing" secondItem="FTP-EJ-df6" secondAttribute="trailing" type="default" id="Fsd-na-cEF"/>
-                            <constraint firstItem="d6B-aT-6ao" firstAttribute="trailing" secondItem="Jzy-2O-mHK" secondAttribute="trailing" type="default" id="Jdd-G8-ZLM"/>
-                            <constraint firstItem="FTP-EJ-df6" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="MQv-th-ypc"/>
-                            <constraint firstItem="nmg-cA-U0H" firstAttribute="centerX" secondItem="Jzy-2O-mHK" secondAttribute="centerX" type="default" id="Mc1-cL-pfZ"/>
-                            <constraint firstItem="hm4-Wm-Slq" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" type="default" id="SjY-9e-1SM"/>
-                            <constraint firstItem="d6B-aT-6ao" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" type="default" id="k24-ND-4mv"/>
-                            <constraint firstItem="ByJ-O3-xwj" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="kfn-1x-cy4"/>
-                            <constraint firstItem="d6B-aT-6ao" firstAttribute="bottom" secondItem="Jzy-2O-mHK" secondAttribute="bottom" type="default" id="loS-yp-K8N"/>
-                            <constraint firstItem="oiy-LO-LTD" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="oBW-C8-cJS"/>
-                            <constraint firstItem="oiy-LO-LTD" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" type="default" id="pCe-Ft-rnD"/>
-                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="phj-2z-kRH"/>
-                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="48" id="qu3-xr-zTs"/>
-                            <constraint firstItem="WTW-2a-duV" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="110" id="ued-cM-hfy"/>
-                            <constraint firstAttribute="bottom" secondItem="ByJ-O3-xwj" secondAttribute="bottom" constant="141" id="um7-PC-axl"/>
-                            <constraint firstItem="hm4-Wm-Slq" firstAttribute="trailing" secondItem="oiy-LO-LTD" secondAttribute="trailing" type="default" id="xw0-7g-NAN"/>
-                            <constraint firstItem="FTP-EJ-df6" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="96" id="ylG-On-xRX"/>
-                            <constraint firstItem="8Q4-fX-tE9" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="106" id="z3S-7V-Vvb"/>
+                            <constraint firstItem="d6B-aT-6ao" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" type="default" id="0A2-UK-JD6"/>
+                            <constraint firstItem="nmg-cA-U0H" firstAttribute="centerY" secondItem="hm4-Wm-Slq" secondAttribute="centerY" type="default" id="5yJ-bH-Tu6"/>
+                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="77A-SF-XKe"/>
+                            <constraint firstItem="8Q4-fX-tE9" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="106" id="Kjc-kg-I9z"/>
+                            <constraint firstItem="FTP-EJ-df6" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="NDo-3e-lx7"/>
+                            <constraint firstItem="ByJ-O3-xwj" firstAttribute="trailing" secondItem="FTP-EJ-df6" secondAttribute="trailing" type="default" id="Vpi-z9-45c"/>
+                            <constraint firstItem="hm4-Wm-Slq" firstAttribute="bottom" secondItem="Jzy-2O-mHK" secondAttribute="bottom" type="default" id="VsL-xx-FCB"/>
+                            <constraint firstItem="8Q4-fX-tE9" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" constant="-64" id="W7W-qY-0yI"/>
+                            <constraint firstItem="d6B-aT-6ao" firstAttribute="trailing" secondItem="Jzy-2O-mHK" secondAttribute="trailing" type="default" id="Xbv-Uf-77c"/>
+                            <constraint firstAttribute="bottom" secondItem="ByJ-O3-xwj" secondAttribute="bottom" constant="141" id="Xns-Vd-hub"/>
+                            <constraint firstItem="ByJ-O3-xwj" firstAttribute="trailing" secondItem="hm4-Wm-Slq" secondAttribute="trailing" type="default" id="c0W-vk-LtR"/>
+                            <constraint firstItem="oiy-LO-LTD" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="dA4-Ga-8Ji"/>
+                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="trailing" secondItem="oiy-LO-LTD" secondAttribute="trailing" type="default" id="e2j-QF-RgD"/>
+                            <constraint firstItem="d6B-aT-6ao" firstAttribute="bottom" secondItem="Jzy-2O-mHK" secondAttribute="bottom" type="default" id="fbE-Mg-CP7"/>
+                            <constraint firstItem="WTW-2a-duV" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="110" id="gP4-1d-cE7"/>
+                            <constraint firstItem="hm4-Wm-Slq" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" type="default" id="kXJ-nL-rQP"/>
+                            <constraint firstItem="nmg-cA-U0H" firstAttribute="centerX" secondItem="Jzy-2O-mHK" secondAttribute="centerX" type="default" id="nsb-Uu-pJd"/>
+                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="trailing" secondItem="FTP-EJ-df6" secondAttribute="trailing" type="default" id="qmS-3L-li2"/>
+                            <constraint firstItem="FTP-EJ-df6" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="96" id="qpJ-AW-s5e"/>
+                            <constraint firstItem="oiy-LO-LTD" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" type="default" id="rzk-5a-bWD"/>
+                            <constraint firstAttribute="trailing" secondItem="WTW-2a-duV" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="s1w-pZ-DOg"/>
+                            <constraint firstItem="ByJ-O3-xwj" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="uXJ-vS-LXP"/>
+                            <constraint firstItem="hm4-Wm-Slq" firstAttribute="leading" secondItem="Jzy-2O-mHK" secondAttribute="leading" type="default" id="ufD-qd-Qas"/>
+                            <constraint firstItem="Pl0-Wc-VIz" firstAttribute="top" secondItem="Jzy-2O-mHK" secondAttribute="top" constant="48" id="vqw-59-ueI"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="WcT-7w-7xF" appends="YES" id="YOb-AB-Isd"/>
@@ -383,9 +403,6 @@
         <class className="PlayerMachineViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayerMachineViewController.h"/>
             <relationships>
-                <relationship kind="action" name="GotoAdvanced:"/>
-                <relationship kind="action" name="LongPressed:"/>
-                <relationship kind="action" name="QUIT:"/>
                 <relationship kind="outlet" name="IMAdvanced" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="QUIT" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="feedbackLabel" candidateClass="UILabel"/>
@@ -396,9 +413,12 @@
         <class className="mainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/mainViewController.h"/>
             <relationships>
+                <relationship kind="action" name="JAM:"/>
+                <relationship kind="action" name="Refresh:"/>
                 <relationship kind="action" name="masterDown:"/>
                 <relationship kind="outlet" name="Down" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="JAM" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="Refresh" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WI" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="masterName" candidateClass="UILabel"/>
             </relationships>

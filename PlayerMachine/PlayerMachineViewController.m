@@ -337,13 +337,13 @@
             CueString = @"Fast";
             break;
         case 3:
-            CueString = @"OK";
+            CueString = @"Solo";
             break;
         case 4:
             CueString = @"High";
             break;
         case 5:
-            CueString = @"Low";
+            CueString = @"Ready";
             break;
         case 6:
             CueString = @"Strong";
