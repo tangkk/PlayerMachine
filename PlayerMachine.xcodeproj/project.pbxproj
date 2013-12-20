@@ -26,6 +26,7 @@
 		9056430C17CB445C00248E72 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9056430B17CB445C00248E72 /* CoreAudio.framework */; };
 		9056430E17CB446300248E72 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9056430D17CB446300248E72 /* AVFoundation.framework */; };
 		905E2D4517C088250020AAFB /* Advanced.png in Resources */ = {isa = PBXBuildFile; fileRef = 905E2D4417C088250020AAFB /* Advanced.png */; };
+		90794DA21820A73200E67485 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90794DA11820A73200E67485 /* Images.xcassets */; };
 		9094412B17BB286800F3A0FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9094412A17BB286800F3A0FD /* UIKit.framework */; };
 		9094412D17BB286800F3A0FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9094412C17BB286800F3A0FD /* Foundation.framework */; };
 		9094412F17BB286800F3A0FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9094412E17BB286800F3A0FD /* CoreGraphics.framework */; };
@@ -37,8 +38,8 @@
 		9094414117BB286800F3A0FD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9094414017BB286800F3A0FD /* Default-568h@2x.png */; };
 		9094414417BB286800F3A0FD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9094414217BB286800F3A0FD /* MainStoryboard.storyboard */; };
 		9094414717BB286800F3A0FD /* PlayerMachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094414617BB286800F3A0FD /* PlayerMachineViewController.m */; };
-		909F89D217D761D100A79CF2 /* PlayerMachine.png in Resources */ = {isa = PBXBuildFile; fileRef = 909F89D017D761D100A79CF2 /* PlayerMachine.png */; };
-		909F89D317D761D100A79CF2 /* PlayerMachine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 909F89D117D761D100A79CF2 /* PlayerMachine@2x.png */; };
+		90E4BCE91820A80C00BCAEB7 /* WIJAM@114.png in Resources */ = {isa = PBXBuildFile; fileRef = 90E4BCE71820A80C00BCAEB7 /* WIJAM@114.png */; };
+		90E4BCEA1820A80C00BCAEB7 /* WIJAM@120.png in Resources */ = {isa = PBXBuildFile; fileRef = 90E4BCE81820A80C00BCAEB7 /* WIJAM@120.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,8 +73,9 @@
 		9056430B17CB445C00248E72 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		9056430D17CB446300248E72 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		905E2D4417C088250020AAFB /* Advanced.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Advanced.png; sourceTree = "<group>"; };
+		90794DA11820A73200E67485 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		907D9FB417BE033B00147DBC /* Definition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Definition.h; sourceTree = "<group>"; };
-		9094412717BB286800F3A0FD /* PlayerMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9094412717BB286800F3A0FD /* WIJAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WIJAM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9094412A17BB286800F3A0FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9094412C17BB286800F3A0FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9094412E17BB286800F3A0FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -89,8 +91,8 @@
 		9094414317BB286800F3A0FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		9094414517BB286800F3A0FD /* PlayerMachineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerMachineViewController.h; sourceTree = "<group>"; };
 		9094414617BB286800F3A0FD /* PlayerMachineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerMachineViewController.m; sourceTree = "<group>"; };
-		909F89D017D761D100A79CF2 /* PlayerMachine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerMachine.png; sourceTree = "<group>"; };
-		909F89D117D761D100A79CF2 /* PlayerMachine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayerMachine@2x.png"; sourceTree = "<group>"; };
+		90E4BCE71820A80C00BCAEB7 /* WIJAM@114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WIJAM@114.png"; sourceTree = "<group>"; };
+		90E4BCE81820A80C00BCAEB7 /* WIJAM@120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WIJAM@120.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +142,7 @@
 		9094412817BB286800F3A0FD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9094412717BB286800F3A0FD /* PlayerMachine.app */,
+				9094412717BB286800F3A0FD /* WIJAM.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +182,7 @@
 				9056430217CB43C800248E72 /* NoteNumDict.m */,
 				9094413917BB286800F3A0FD /* PlayerMachineAppDelegate.h */,
 				9094413A17BB286800F3A0FD /* PlayerMachineAppDelegate.m */,
+				90794DA11820A73200E67485 /* Images.xcassets */,
 				9094413117BB286800F3A0FD /* Supporting Files */,
 			);
 			path = PlayerMachine;
@@ -188,8 +191,8 @@
 		9094413117BB286800F3A0FD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				909F89D017D761D100A79CF2 /* PlayerMachine.png */,
-				909F89D117D761D100A79CF2 /* PlayerMachine@2x.png */,
+				90E4BCE71820A80C00BCAEB7 /* WIJAM@114.png */,
+				90E4BCE81820A80C00BCAEB7 /* WIJAM@120.png */,
 				901E8CFD17C60F59006E1913 /* Triangle_180.png */,
 				901E8CF817C5FD56006E1913 /* Triangle.png */,
 				901E8CF617C5FD4D006E1913 /* ScaleButton.png */,
@@ -224,7 +227,7 @@
 			);
 			name = PlayerMachine;
 			productName = PlayerMachine;
-			productReference = 9094412717BB286800F3A0FD /* PlayerMachine.app */;
+			productReference = 9094412717BB286800F3A0FD /* WIJAM.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -264,14 +267,15 @@
 				9094413F17BB286800F3A0FD /* Default@2x.png in Resources */,
 				9094414117BB286800F3A0FD /* Default-568h@2x.png in Resources */,
 				9094414417BB286800F3A0FD /* MainStoryboard.storyboard in Resources */,
+				90E4BCEA1820A80C00BCAEB7 /* WIJAM@120.png in Resources */,
 				905E2D4517C088250020AAFB /* Advanced.png in Resources */,
 				903770E917C0C91200F42DFA /* Simple.png in Resources */,
+				90E4BCE91820A80C00BCAEB7 /* WIJAM@114.png in Resources */,
 				902E407B17C200D20038DEDD /* WIJAM.png in Resources */,
 				901E8CF717C5FD4D006E1913 /* ScaleButton.png in Resources */,
+				90794DA21820A73200E67485 /* Images.xcassets in Resources */,
 				901E8CF917C5FD56006E1913 /* Triangle.png in Resources */,
 				901E8CFE17C60F59006E1913 /* Triangle_180.png in Resources */,
-				909F89D217D761D100A79CF2 /* PlayerMachine.png in Resources */,
-				909F89D317D761D100A79CF2 /* PlayerMachine@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,13 +384,14 @@
 		9094414B17BB286800F3A0FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerMachine/PlayerMachine-Prefix.pch";
 				INFOPLIST_FILE = "PlayerMachine/PlayerMachine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WIJAM;
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -395,13 +400,14 @@
 		9094414C17BB286800F3A0FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerMachine/PlayerMachine-Prefix.pch";
 				INFOPLIST_FILE = "PlayerMachine/PlayerMachine-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WIJAM;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
